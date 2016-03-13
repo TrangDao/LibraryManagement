@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<body>
+<ui:composition>
+    <h:form>
+        <p:menubar styleClass="form-group form-horizontal">
+
+
+            <p:menuitem value="Books" action="/index.jsf"/>
+            <p:menuitem value="Borrow" url="#" icon="glyphicon glyphicon-plus"/>
+            <p:menuitem value="Statistic" url="#" icon="ui-icon-close"/>
+            <p:submenu label="Others" icon="ui-icon-pencil">
+                <p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />
+                <p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+            </p:submenu>
+
+        </p:menubar></h:form>
+</ui:composition>
+</body>
+</html>

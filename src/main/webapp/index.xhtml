@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+    <h:form>
+
+        <ui:composition template="template/common.xhtml">
+            <ui:define name="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 title">Books Management</div>
+                    </div>
+                    <div class="row">
+                        <button class="margin-bottom-20 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
+                        mdl-button--accent background-blue" onclick="addBookOnClick()">
+                            <span class="glyphicon glyphicon-plus"/>
+                            Add
+                        </button>
+
+                        <button class="margin-bottom-20 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
+                        mdl-button--accent background-blue pull-right" onclick="showSearchBook()">
+                            <span class="glyphicon glyphicon-search"/>
+                            Search
+                        </button>
+                    </div>
+
+                    <p:fieldset id="add-book-group" styleClass="row hidden">
+
+                        <h:outputLabel styleClass="sub-title">New book info</h:outputLabel>
+
+                        <!-- Row 1 -->
+                        <div class="form-horizontal form-group row">
+                            <!-- Title -->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel class="control-label pull-right">Title</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h:inputText styleClass="form-control"></h:inputText>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Category -->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel styleClass="pull-right control-label">Category</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h:inputText styleClass="form-control"></h:inputText>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 2 -->
+                        <div class="form-group row">
+                            <!--Author-->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel styleClass="pull-right control-label">Author</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h:inputText styleClass="form-control"></h:inputText>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Publisher-->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel styleClass="pull-right control-label">Publisher</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h:inputText styleClass="form-control"></h:inputText>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Button-->
+                        <div class="row margin-top-20">
+                            <div class="col-sm-6">
+                                <button class="col-sm-3 margin-bottom-20 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
+                                mdl-button--accent background-blue pull-right" onclick="hideAddNewBook()">
+                                    <span class="glyphicon glyphicon-floppy-disk"/>
+                                    Save
+                                </button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="col-sm-3 margin-bottom-20 mdl-button mdl-js-button mdl-button--raised
+                                mdl-js-ripple-effect mdl-button--accent button-gray" onclick="hideAddNewBook()">
+                                    <span class="glyphicon glyphicon-remove"/>
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </p:fieldset>
+
+
+                    <!-- Search input field -->
+                    <p:fieldset id="search-book-group" styleClass="row hidden">
+                        <h:outputLabel styleClass="sub-title">Search criteria</h:outputLabel>
+                        <!-- Row 1 -->
+                        <div class="form-horizontal form-group row">
+                            <!-- Title -->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel class="control-label pull-right">Title</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h:inputText styleClass="form-control"></h:inputText>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Category -->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel styleClass="pull-right control-label">Category</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h:inputText styleClass="form-control"></h:inputText>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 2 -->
+                        <div class="form-group row">
+                            <!--Author-->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel styleClass="pull-right control-label">Author</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h:inputText styleClass="form-control"></h:inputText>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Publisher-->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel styleClass="pull-right control-label">Publisher</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h:inputText styleClass="form-control"></h:inputText>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Button-->
+                        <div class="row margin-top-20">
+                            <div class="col-sm-6">
+                                <button class="col-sm-3 margin-bottom-20 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
+                                mdl-button--accent background-blue pull-right" onclick="hideSearchBook()">
+                                    <span class="glyphicon glyphicon-search"/>
+                                    Search
+                                </button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="col-sm-3 margin-bottom-20 mdl-button mdl-js-button mdl-button--raised
+                                mdl-js-ripple-effect mdl-button--accent button-gray" onclick="hideSearchBook()">
+                                    <span class="glyphicon glyphicon-remove"/>
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </p:fieldset>
+                    <div class="row margin-top-20">
+                        <p:dataTable var="book" value="#{booksBean.allBooks}" widgetVar="booksTable">
+                            <f:facet name="header">
+                                <p:outputPanel>
+                                    <h:outputText value="Search all fields" />
+                                    <p:inputText id="globalFilter" onkeyup="PF('booksTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                                </p:outputPanel>
+                            </f:facet>
+
+                            <p:column headerText="Id">
+                                <h:outputText value="#{book}"/>
+                            </p:column>
+
+                            <p:column headerText="Title">
+                                <h:outputText value="#{book}"/>
+                            </p:column>
+
+                            <p:column headerText="Category">
+                                <h:outputText value="#{book}"/>
+                            </p:column>
+
+                            <p:column headerText="Author">
+                                <h:outputText value="#{book}"/>
+                            </p:column>
+
+                            <p:column headerText="Publisher">
+                                <h:outputText value="#{book}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+
+
+                </div>
+            </ui:define>
+        </ui:composition>
+
+    </h:form>
+
+
+</h:body>
+</html>
