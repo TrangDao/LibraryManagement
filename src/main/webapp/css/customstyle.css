@@ -28,7 +28,7 @@
     margin-bottom: 20px;
 }
 
-.ui-state-default {
+.ui-datatable.ui-state-default{
     background: #0096d6;
     color: white;
     font-weight: normal;
@@ -66,4 +66,25 @@ span.ui-menuitem-text {
 }
 span {
     margin-right: 5px;
+}
+
+.ui-tabs .ui-tabs-nav {
+    background: white !important;
+}
+
+li.ui-state-default.ui-tabs-selected.ui-state-active.ui-corner-left {
+    background: #0096d6;
+    color: white;
+}
+
+li.ui-state-default.ui-corner-left {
+    background: #66AEDD;
+}
+
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a {
+    color: white;
+}
+
+div#content {
+    margin-top: 5em;
 }

@@ -7,17 +7,11 @@
 <body>
 <ui:composition>
     <h:form>
-        <p:menubar styleClass="form-group form-horizontal">
-
-
-            <p:menuitem value="Books" action="/index.jsf"/>
+        <p:menubar styleClass="form-group form-horizontal margin-bottom-20">
+            <p:menuitem value="Books" action="index"/>
             <p:menuitem value="Borrow" url="#" icon="glyphicon glyphicon-plus"/>
             <p:menuitem value="Statistic" url="#" icon="ui-icon-close"/>
-            <p:submenu label="Others" icon="ui-icon-pencil">
-                <p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />
-                <p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
-            </p:submenu>
-
+            <p:menuitem value="Others" action="others" icon="ui-icon-pencil"/>
         </p:menubar></h:form>
 </ui:composition>
 </body>
