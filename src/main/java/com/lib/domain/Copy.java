@@ -1,87 +1,46 @@
 package com.lib.domain; /***********************************************************************
- * Module:  Copy.java
- * Author:  lanhnguyen
- * Purpose: Defines the Class Copy
+ * Module:  com.lib.domain.Copy.java
+ * com.lib.domain.Author:  lanhnguyen
+ * Purpose: Defines the Class com.lib.domain.Copy
  ***********************************************************************/
 
-import java.util.*;
-
-/** @pdOid ddaddda9-b173-491f-9709-c5e22221c488 */
+/** @pdOid 52bd9580-2d28-4c98-8580-8d00f9f36a02 */
 public class Copy {
-   /** @pdOid c7249bcc-bf2f-467b-8e6d-44e047012d1d */
+   /** @pdOid 312ce216-f098-4b11-a754-68bf3246c98a */
    public long copyId;
-   /** @pdOid 7f3c343d-da3c-4834-9ab0-7b6427e5e353 */
-   public Date cDate;
-   /** @pdOid 7f8deae7-ecfc-42db-a7ed-d8ac92c1a4dd */
+   /** @pdOid 757b5516-bfe2-4655-a9a7-58cbad3a1c73 */
+   public java.util.Date cDate;
+   /** @pdOid 5f941f4a-46ea-4b8b-9dee-ff569aced9e4 */
    public boolean cStatus;
    
-   /** @pdRoleInfo migr=no name=Book assc=copyBook coll=java.util.Collection impl=java.util.HashSet mult=0..* */
-   public Collection<Book> book;
-   /** @pdRoleInfo migr=no name=Borrow assc=borrowCopy mult=0..1 side=A */
+   /** @pdRoleInfo migr=no name=com.lib.domain.Book assc=copyBook mult=0..1 side=A */
+   public Book book;
+   /** @pdRoleInfo migr=no name=com.lib.domain.Borrow assc=borrowCopy mult=0..1 side=A */
    public Borrow borrow;
-   /** @pdRoleInfo migr=no name=Location assc=copyLocation mult=1..1 side=A */
+   /** @pdRoleInfo migr=no name=com.lib.domain.Location assc=copyLocation mult=1..1 side=A */
    public Location location;
    
    
-   /** @pdGenerated default getter */
-   public Collection<Book> getBook() {
-      if (book == null)
-         book = new HashSet<Book>();
+   /** @pdGenerated default parent getter */
+   public Book getBook() {
       return book;
    }
    
-   /** @pdGenerated default iterator getter */
-   public Iterator getIteratorBook() {
-      if (book == null)
-         book = new HashSet<Book>();
-      return book.iterator();
-   }
-   
-   /** @pdGenerated default setter
+   /** @pdGenerated default parent setter
      * @param newBook */
-   public void setBook(Collection<Book> newBook) {
-      removeAllBook();
-      for (Iterator iter = newBook.iterator(); iter.hasNext();)
-         addBook((Book)iter.next());
-   }
-   
-   /** @pdGenerated default add
-     * @param newBook */
-   public void addBook(Book newBook) {
-      if (newBook == null)
-         return;
-      if (this.book == null)
-         this.book = new HashSet<Book>();
-      if (!this.book.contains(newBook))
+   public void setBook(Book newBook) {
+      if (this.book == null || !this.book.equals(newBook))
       {
-         this.book.add(newBook);
-         newBook.setCopy(this);      
-      }
-   }
-   
-   /** @pdGenerated default remove
-     * @param oldBook */
-   public void removeBook(Book oldBook) {
-      if (oldBook == null)
-         return;
-      if (this.book != null)
-         if (this.book.contains(oldBook))
+         if (this.book != null)
          {
-            this.book.remove(oldBook);
-            oldBook.setCopy((Copy)null);
+            Book oldBook = this.book;
+            this.book = null;
+            oldBook.removeCopy(this);
          }
-   }
-   
-   /** @pdGenerated default removeAll */
-   public void removeAllBook() {
-      if (book != null)
-      {
-         Book oldBook;
-         for (Iterator iter = getIteratorBook(); iter.hasNext();)
+         if (newBook != null)
          {
-            oldBook = (Book)iter.next();
-            iter.remove();
-            oldBook.setCopy((Copy)null);
+            this.book = newBook;
+            this.book.addCopy(this);
          }
       }
    }

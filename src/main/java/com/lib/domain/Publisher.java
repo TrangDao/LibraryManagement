@@ -1,45 +1,43 @@
 package com.lib.domain; /***********************************************************************
- * Module:  Publisher.java
- * Author:  lanhnguyen
- * Purpose: Defines the Class Publisher
+ * Module:  com.lib.domain.Publisher.java
+ * com.lib.domain.Author:  lanhnguyen
+ * Purpose: Defines the Class com.lib.domain.Publisher
  ***********************************************************************/
 
-import java.util.*;
-
-/** @pdOid 56e3bed1-4d6f-4004-ae00-9c7f665b89ff */
+/** @pdOid aab92ca3-0b47-4870-b89b-c31d5b33b6f0 */
 public class Publisher {
-   /** @pdOid 49372a31-23cb-4e88-b175-03a6926027cf */
+   /** @pdOid 6847d3b6-da81-43ba-b2d1-b3d6a74a0eeb */
    public long pId;
-   /** @pdOid 98b8996c-cea4-4f7d-8ae3-02123537f94a */
-   public String pName;
-   /** @pdOid 65adbb70-f070-4a2b-980d-7cbc4c7ec52b */
-   public String pDescription;
-   /** @pdOid 198484af-e178-4a9a-ae3e-cf84e269dffb */
+   /** @pdOid 63a599ae-4f2a-4679-a278-dd4ad5f0d332 */
+   public java.lang.String pName;
+   /** @pdOid b66ccbaf-c10c-4d90-878b-da4d71d6c623 */
+   public java.lang.String pDescription;
+   /** @pdOid 1d3ef2aa-3d95-42b1-a7e5-15dbcdeb8c3b */
    public boolean pIsActive;
    
-   /** @pdRoleInfo migr=no name=Book assc=bookPub coll=java.util.Collection impl=java.util.HashSet mult=1..* */
-   public Collection<Book> book;
+   /** @pdRoleInfo migr=no name=com.lib.domain.Book assc=bookPub coll=java.util.Collection impl=java.util.HashSet mult=1..* */
+   public java.util.Collection<Book> book;
    
    
    /** @pdGenerated default getter */
-   public Collection<Book> getBook() {
+   public java.util.Collection<Book> getBook() {
       if (book == null)
-         book = new HashSet<Book>();
+         book = new java.util.HashSet<Book>();
       return book;
    }
    
    /** @pdGenerated default iterator getter */
-   public Iterator getIteratorBook() {
+   public java.util.Iterator getIteratorBook() {
       if (book == null)
-         book = new HashSet<Book>();
+         book = new java.util.HashSet<Book>();
       return book.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newBook */
-   public void setBook(Collection<Book> newBook) {
+   public void setBook(java.util.Collection<Book> newBook) {
       removeAllBook();
-      for (Iterator iter = newBook.iterator(); iter.hasNext();)
+      for (java.util.Iterator iter = newBook.iterator(); iter.hasNext();)
          addBook((Book)iter.next());
    }
    
@@ -49,7 +47,7 @@ public class Publisher {
       if (newBook == null)
          return;
       if (this.book == null)
-         this.book = new HashSet<Book>();
+         this.book = new java.util.HashSet<Book>();
       if (!this.book.contains(newBook))
       {
          this.book.add(newBook);
@@ -75,7 +73,7 @@ public class Publisher {
       if (book != null)
       {
          Book oldBook;
-         for (Iterator iter = getIteratorBook(); iter.hasNext();)
+         for (java.util.Iterator iter = getIteratorBook(); iter.hasNext();)
          {
             oldBook = (Book)iter.next();
             iter.remove();

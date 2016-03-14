@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 9.x                               */
-/* Created on:     14/03/2016 10:25:38 AM                       */
+/* Created on:     14/03/2016 11:47:54 AM                       */
 /*==============================================================*/
 
 
@@ -24,17 +24,17 @@ drop table HISTORY;
 
 drop table LOCATION;
 
-drop table MEMBERS;
+drop table MEMBER;
 
 drop table PUBLISHER;
 
-drop table "USER";
+drop table STAFF;
 
 /*==============================================================*/
 /* Table: AUTHOR                                                */
 /*==============================================================*/
 create table AUTHOR (
-   A_ID                 SERIAL not null,
+   A_ID                 SERIAL               not null,
    A_FISTNAME           CHAR(100)            not null,
    A_MIDNAME            CHAR(100)            not null,
    A_LASTNAME           CHAR(100)            not null,
@@ -46,9 +46,8 @@ create table AUTHOR (
 /* Table: BOOK                                                  */
 /*==============================================================*/
 create table BOOK (
-   B_ID                 SERIAL not null,
+   B_ID                 SERIAL               not null,
    P_ID                 INT4                 not null,
-   COPY_ID              INT4                 not null,
    B_TITLE              CHAR(255)            not null,
    B_DATE               DATE                 not null,
    B_ISACTIVE           BOOL                 not null,
@@ -69,7 +68,7 @@ create table BOOK_AUTHOR (
 /* Table: BOOK_CATEGORY                                         */
 /*==============================================================*/
 create table BOOK_CATEGORY (
-   C_ID                 FLOAT8               not null,
+   C_ID                 INT4                 not null,
    B_ID                 INT4                 not null,
    constraint PK_BOOK_CATEGORY primary key (C_ID, B_ID)
 );
@@ -78,7 +77,7 @@ create table BOOK_CATEGORY (
 /* Table: BORROW                                                */
 /*==============================================================*/
 create table BORROW (
-   BORROW_ID            SERIAL not null,
+   BORROW_ID            SERIAL               not null,
    M_ID                 INT4                 null,
    U_USER               CHAR(55)             null,
    B_DATE               DATE                 not null,
@@ -89,7 +88,7 @@ create table BORROW (
 /* Table: BORROW_DETAIL                                         */
 /*==============================================================*/
 create table BORROW_DETAIL (
-   BD_ID                SERIAL not null,
+   BD_ID                SERIAL               not null,
    BORROW_ID            INT4                 null,
    B_DATE               DATE                 not null,
    R_DATE               DATE                 not null,
@@ -100,7 +99,7 @@ create table BORROW_DETAIL (
 /* Table: CATEGORY                                              */
 /*==============================================================*/
 create table CATEGORY (
-   C_ID                 FLOAT8               not null,
+   C_ID                 SERIAL               not null,
    C_NAME               CHAR(100)            not null,
    C_DESCRIPTION        CHAR(255)            null,
    C_ISACTIVE           BOOL                 not null,
@@ -111,7 +110,8 @@ create table CATEGORY (
 /* Table: COPY                                                  */
 /*==============================================================*/
 create table COPY (
-   COPY_ID              SERIAL not null,
+   COPY_ID              SERIAL               not null,
+   B_ID                 INT4                 null,
    BORROW_ID            INT4                 null,
    L_ID                 INT4                 not null,
    C_DATE               DATE                 not null,
@@ -123,7 +123,7 @@ create table COPY (
 /* Table: HISTORY                                               */
 /*==============================================================*/
 create table HISTORY (
-   H_ID                 SERIAL not null,
+   H_ID                 SERIAL               not null,
    H_BORROW             DATE                 not null,
    H_RETURN             DATE                 not null,
    constraint PK_HISTORY primary key (H_ID)
@@ -133,31 +133,31 @@ create table HISTORY (
 /* Table: LOCATION                                              */
 /*==============================================================*/
 create table LOCATION (
-   L_ID                 SERIAL not null,
+   L_ID                 SERIAL               not null,
    L_POSITION           CHAR(50)             not null,
    L_STOCK              INT4                 null,
    constraint PK_LOCATION primary key (L_ID)
 );
 
 /*==============================================================*/
-/* Table: MEMBERS                                               */
+/* Table: MEMBER                                                */
 /*==============================================================*/
-create table MEMBERS (
-   M_ID                 SERIAL not null,
+create table MEMBER (
+   M_ID                 SERIAL               not null,
    M_NAME               CHAR(255)            not null,
    M_ADDRESS            CHAR(255)            not null,
    M_TEL                CHAR(12)             null,
    M_GENDER             CHAR(5)              null,
    M_EMAIL              CHAR(55)             null,
    M_ISACTIVE           BOOL                 not null,
-   constraint PK_MEMBERS primary key (M_ID)
+   constraint PK_MEMBER primary key (M_ID)
 );
 
 /*==============================================================*/
 /* Table: PUBLISHER                                             */
 /*==============================================================*/
 create table PUBLISHER (
-   P_ID                 SERIAL not null,
+   P_ID                 SERIAL               not null,
    P_NAME               CHAR(150)            not null,
    P_DESCRIPTION        CHAR(255)            null,
    P_ISACTIVE           BOOL                 not null,
@@ -165,9 +165,9 @@ create table PUBLISHER (
 );
 
 /*==============================================================*/
-/* Table: "USER"                                                */
+/* Table: STAFF                                                 */
 /*==============================================================*/
-create table "USER" (
+create table STAFF (
    U_USER               CHAR(55)             not null,
    U_PASS               CHAR(100)            not null,
    U_FULLNAME           CHAR(255)            not null,
@@ -175,17 +175,12 @@ create table "USER" (
    U_EMAIL              CHAR(15)             null,
    U_TEL                CHAR(15)             null,
    U_ISACTIVE           BOOL                 not null,
-   constraint PK_USER primary key (U_USER)
+   constraint PK_STAFF primary key (U_USER)
 );
 
 alter table BOOK
    add constraint FK_BOOK_BOOK_PUB_PUBLISHE foreign key (P_ID)
       references PUBLISHER (P_ID)
-      on delete restrict on update restrict;
-
-alter table BOOK
-   add constraint FK_BOOK_COPY_BOOK_COPY foreign key (COPY_ID)
-      references COPY (COPY_ID)
       on delete restrict on update restrict;
 
 alter table BOOK_AUTHOR
@@ -209,13 +204,13 @@ alter table BOOK_CATEGORY
       on delete restrict on update restrict;
 
 alter table BORROW
-   add constraint FK_BORROW_MEMBER_BR_MEMBERS foreign key (M_ID)
-      references MEMBERS (M_ID)
+   add constraint FK_BORROW_MEMBER_BR_MEMBER foreign key (M_ID)
+      references MEMBER (M_ID)
       on delete restrict on update restrict;
 
 alter table BORROW
-   add constraint FK_BORROW_USER_BORR_USER foreign key (U_USER)
-      references "USER" (U_USER)
+   add constraint FK_BORROW_USER_BORR_STAFF foreign key (U_USER)
+      references STAFF (U_USER)
       on delete restrict on update restrict;
 
 alter table BORROW_DETAIL
@@ -226,6 +221,11 @@ alter table BORROW_DETAIL
 alter table COPY
    add constraint FK_COPY_BORROW_CO_BORROW foreign key (BORROW_ID)
       references BORROW (BORROW_ID)
+      on delete restrict on update restrict;
+
+alter table COPY
+   add constraint FK_COPY_COPY_BOOK_BOOK foreign key (B_ID)
+      references BOOK (B_ID)
       on delete restrict on update restrict;
 
 alter table COPY

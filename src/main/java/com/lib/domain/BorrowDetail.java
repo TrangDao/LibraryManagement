@@ -1,21 +1,19 @@
 package com.lib.domain; /***********************************************************************
- * Module:  BorrowDetail.java
- * Author:  lanhnguyen
- * Purpose: Defines the Class BorrowDetail
+ * Module:  com.lib.domain.BorrowDetail.java
+ * com.lib.domain.Author:  lanhnguyen
+ * Purpose: Defines the Class com.lib.domain.BorrowDetail
  ***********************************************************************/
 
-import java.util.*;
-
-/** @pdOid 28f79a1c-4ba4-45b8-b04f-dec959d0db30 */
+/** @pdOid 786946bf-965f-4e32-8971-3b9a31d62d52 */
 public class BorrowDetail {
-   /** @pdOid 0d2b17d5-607e-4d4a-9f7c-a665e82836f9 */
+   /** @pdOid bc910482-bb11-48e3-82f4-19df51f64d2f */
    public long bdId;
-   /** @pdOid 2c658197-5901-42e4-84b4-1139ab5c791a */
-   public Date bDate;
-   /** @pdOid 193e7d8f-f861-4149-8d07-c8509eaf0034 */
-   public Date rDate;
+   /** @pdOid accabb37-4a2c-437d-8b69-94d0f3616f9e */
+   public java.util.Date bDate;
+   /** @pdOid f76579c6-db85-4fef-867f-940fc16e12dd */
+   public java.util.Date rDate;
    
-   /** @pdRoleInfo migr=no name=Borrow assc=borrowDetail mult=0..1 side=A */
+   /** @pdRoleInfo migr=no name=com.lib.domain.Borrow assc=borrowDetail mult=0..1 side=A */
    public Borrow borrow;
    
    

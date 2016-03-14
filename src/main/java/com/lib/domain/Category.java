@@ -1,45 +1,43 @@
 package com.lib.domain; /***********************************************************************
- * Module:  Category.java
- * Author:  lanhnguyen
- * Purpose: Defines the Class Category
+ * Module:  com.lib.domain.Category.java
+ * com.lib.domain.Author:  lanhnguyen
+ * Purpose: Defines the Class com.lib.domain.Category
  ***********************************************************************/
 
-import java.util.*;
-
-/** @pdOid 04fb2540-2c27-4832-b54b-aa7bbc8162b2 */
+/** @pdOid 1998f33c-26b1-4603-9402-e0bcdbd90de7 */
 public class Category {
-   /** @pdOid e9f235b3-772f-472b-aaa5-54b37c7a14af */
-   public float(8,2) cId;
-   /** @pdOid a10ef9b9-767b-41d5-af2f-a0ec54667721 */
-   public String cName;
-   /** @pdOid 36ce5add-389b-4303-9826-0ddbb1049fd9 */
-   public String cDescription;
-   /** @pdOid bf4d701b-7d0c-43da-96ea-20063df4c5fe */
+   /** @pdOid 9cf81758-d139-4fab-9850-b433980385dd */
+   public long cId;
+   /** @pdOid 1eb6df07-7a13-466d-ab96-d7e5ca67b5b0 */
+   public java.lang.String cName;
+   /** @pdOid 10564992-9f51-474e-bcaf-69c766db7bd7 */
+   public java.lang.String cDescription;
+   /** @pdOid b7e35822-9ed5-4fb1-be14-bd38251a16ce */
    public boolean cIsActive;
    
-   /** @pdRoleInfo migr=no name=Book assc=bookCategory coll=java.util.Collection impl=java.util.HashSet mult=1..* side=A */
-   public Collection<Book> Book_Category;
+   /** @pdRoleInfo migr=no name=com.lib.domain.Book assc=bookCategory coll=java.util.Collection impl=java.util.HashSet mult=1..* side=A */
+   public java.util.Collection<Book> Book_Category;
    
    
    /** @pdGenerated default getter */
-   public Collection<Book> getBook_Category() {
+   public java.util.Collection<Book> getBook_Category() {
       if (Book_Category == null)
-         Book_Category = new HashSet<Book>();
+         Book_Category = new java.util.HashSet<Book>();
       return Book_Category;
    }
    
    /** @pdGenerated default iterator getter */
-   public Iterator getIteratorBook_Category() {
+   public java.util.Iterator getIteratorBook_Category() {
       if (Book_Category == null)
-         Book_Category = new HashSet<Book>();
+         Book_Category = new java.util.HashSet<Book>();
       return Book_Category.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newBook_Category */
-   public void setBook_Category(Collection<Book> newBook_Category) {
+   public void setBook_Category(java.util.Collection<Book> newBook_Category) {
       removeAllBook_Category();
-      for (Iterator iter = newBook_Category.iterator(); iter.hasNext();)
+      for (java.util.Iterator iter = newBook_Category.iterator(); iter.hasNext();)
          addBook_Category((Book)iter.next());
    }
    
@@ -49,7 +47,7 @@ public class Category {
       if (newBook == null)
          return;
       if (this.Book_Category == null)
-         this.Book_Category = new HashSet<Book>();
+         this.Book_Category = new java.util.HashSet<Book>();
       if (!this.Book_Category.contains(newBook))
       {
          this.Book_Category.add(newBook);
@@ -75,7 +73,7 @@ public class Category {
       if (Book_Category != null)
       {
          Book oldBook;
-         for (Iterator iter = getIteratorBook_Category(); iter.hasNext();)
+         for (java.util.Iterator iter = getIteratorBook_Category(); iter.hasNext();)
          {
             oldBook = (Book)iter.next();
             iter.remove();

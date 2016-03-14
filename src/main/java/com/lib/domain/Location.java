@@ -1,43 +1,41 @@
 package com.lib.domain; /***********************************************************************
- * Module:  Location.java
- * Author:  lanhnguyen
- * Purpose: Defines the Class Location
+ * Module:  com.lib.domain.Location.java
+ * com.lib.domain.Author:  lanhnguyen
+ * Purpose: Defines the Class com.lib.domain.Location
  ***********************************************************************/
 
-import java.util.*;
-
-/** @pdOid 22879f1d-4127-44a7-b389-22dc4e6dc5e7 */
+/** @pdOid ca2df87f-662b-4a44-85b1-e95d56b33e55 */
 public class Location {
-   /** @pdOid 141bfba2-a066-4671-95d8-c1292a8f1b81 */
+   /** @pdOid 7cb79104-8870-4997-b10c-ea3184ede23d */
    public long lId;
-   /** @pdOid d32c019e-b0ad-4e5d-975d-379c1ea89f87 */
-   public String lPosition;
-   /** @pdOid 65a28629-a14d-4b73-abdc-e399f8bdcca9 */
+   /** @pdOid 0b475071-ab97-4882-b1a5-8710477847ad */
+   public java.lang.String lPosition;
+   /** @pdOid e9602946-69c9-405b-906f-cb6105efdacf */
    public int lStock;
    
-   /** @pdRoleInfo migr=no name=Copy assc=copyLocation coll=java.util.Collection impl=java.util.HashSet mult=1..* */
-   public Collection<Copy> copy;
+   /** @pdRoleInfo migr=no name=com.lib.domain.Copy assc=copyLocation coll=java.util.Collection impl=java.util.HashSet mult=1..* */
+   public java.util.Collection<Copy> copy;
    
    
    /** @pdGenerated default getter */
-   public Collection<Copy> getCopy() {
+   public java.util.Collection<Copy> getCopy() {
       if (copy == null)
-         copy = new HashSet<Copy>();
+         copy = new java.util.HashSet<Copy>();
       return copy;
    }
    
    /** @pdGenerated default iterator getter */
-   public Iterator getIteratorCopy() {
+   public java.util.Iterator getIteratorCopy() {
       if (copy == null)
-         copy = new HashSet<Copy>();
+         copy = new java.util.HashSet<Copy>();
       return copy.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newCopy */
-   public void setCopy(Collection<Copy> newCopy) {
+   public void setCopy(java.util.Collection<Copy> newCopy) {
       removeAllCopy();
-      for (Iterator iter = newCopy.iterator(); iter.hasNext();)
+      for (java.util.Iterator iter = newCopy.iterator(); iter.hasNext();)
          addCopy((Copy)iter.next());
    }
    
@@ -47,7 +45,7 @@ public class Location {
       if (newCopy == null)
          return;
       if (this.copy == null)
-         this.copy = new HashSet<Copy>();
+         this.copy = new java.util.HashSet<Copy>();
       if (!this.copy.contains(newCopy))
       {
          this.copy.add(newCopy);
@@ -73,7 +71,7 @@ public class Location {
       if (copy != null)
       {
          Copy oldCopy;
-         for (Iterator iter = getIteratorCopy(); iter.hasNext();)
+         for (java.util.Iterator iter = getIteratorCopy(); iter.hasNext();)
          {
             oldCopy = (Copy)iter.next();
             iter.remove();

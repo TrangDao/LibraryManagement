@@ -1,53 +1,51 @@
 package com.lib.domain; /***********************************************************************
- * Module:  Book.java
- * Author:  lanhnguyen
- * Purpose: Defines the Class Book
+ * Module:  com.lib.domain.Book.java
+ * com.lib.domain.Author:  lanhnguyen
+ * Purpose: Defines the Class com.lib.domain.Book
  ***********************************************************************/
 
-import java.util.*;
-
-/** @pdOid d79a15d3-5c20-450f-9027-3c6e6dfada1f */
+/** @pdOid 56b9b7dc-0895-4fff-b390-40502c310ff7 */
 public class Book {
-   /** @pdOid 44038d56-2646-48d6-9694-0d2fd1295566 */
+   /** @pdOid ce99b3eb-53b4-47bf-b1d9-bfb215d9dc61 */
    public long bId;
-   /** @pdOid e15e208b-5410-46bf-ba02-0c5f5cd41d63 */
-   public String bTitle;
-   /** @pdOid 70faa0c1-3633-431e-8381-4db7c28f5ab2 */
-   public Date bDate;
-   /** @pdOid d331a95e-e80d-44e2-9789-0f2cb99a22c5 */
+   /** @pdOid 684d5ea4-71f8-4afd-bb06-84b0f2b766c0 */
+   public java.lang.String bTitle;
+   /** @pdOid 9f7731f1-27bc-47b7-99b4-a509abe9ca43 */
+   public java.util.Date bDate;
+   /** @pdOid 6d4c3f03-7516-4756-a681-9ff3cda02caf */
    public boolean bIsActive;
-   /** @pdOid 4c110171-27af-4c12-8cff-d0ac8fd47ec5 */
+   /** @pdOid 22a01f3d-be8e-4ff3-8f2b-49d3390b55f4 */
    public int bQuantity;
    
-   /** @pdRoleInfo migr=no name=Author assc=bookAuthor coll=java.util.Collection impl=java.util.HashSet mult=1..* */
-   public Collection<Author> Book_Author;
-   /** @pdRoleInfo migr=no name=Category assc=bookCategory coll=java.util.Collection impl=java.util.HashSet mult=1..* */
-   public Collection<Category> Book_Category;
-   /** @pdRoleInfo migr=no name=Publisher assc=bookPub mult=1..1 side=A */
+   /** @pdRoleInfo migr=no name=com.lib.domain.Author assc=bookAuthor coll=java.util.Collection impl=java.util.HashSet mult=1..* */
+   public java.util.Collection<Author> Book_Author;
+   /** @pdRoleInfo migr=no name=com.lib.domain.Category assc=bookCategory coll=java.util.Collection impl=java.util.HashSet mult=1..* */
+   public java.util.Collection<Category> Book_Category;
+   /** @pdRoleInfo migr=no name=com.lib.domain.Copy assc=copyBook coll=java.util.Collection impl=java.util.HashSet mult=1..* */
+   public java.util.Collection<Copy> copy;
+   /** @pdRoleInfo migr=no name=com.lib.domain.Publisher assc=bookPub mult=1..1 side=A */
    public Publisher publisher;
-   /** @pdRoleInfo migr=no name=Copy assc=copyBook mult=1..1 side=A */
-   public Copy copy;
    
    
    /** @pdGenerated default getter */
-   public Collection<Author> getBook_Author() {
+   public java.util.Collection<Author> getBook_Author() {
       if (Book_Author == null)
-         Book_Author = new HashSet<Author>();
+         Book_Author = new java.util.HashSet<Author>();
       return Book_Author;
    }
    
    /** @pdGenerated default iterator getter */
-   public Iterator getIteratorBook_Author() {
+   public java.util.Iterator getIteratorBook_Author() {
       if (Book_Author == null)
-         Book_Author = new HashSet<Author>();
+         Book_Author = new java.util.HashSet<Author>();
       return Book_Author.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newBook_Author */
-   public void setBook_Author(Collection<Author> newBook_Author) {
+   public void setBook_Author(java.util.Collection<Author> newBook_Author) {
       removeAllBook_Author();
-      for (Iterator iter = newBook_Author.iterator(); iter.hasNext();)
+      for (java.util.Iterator iter = newBook_Author.iterator(); iter.hasNext();)
          addBook_Author((Author)iter.next());
    }
    
@@ -57,7 +55,7 @@ public class Book {
       if (newAuthor == null)
          return;
       if (this.Book_Author == null)
-         this.Book_Author = new HashSet<Author>();
+         this.Book_Author = new java.util.HashSet<Author>();
       if (!this.Book_Author.contains(newAuthor))
       {
          this.Book_Author.add(newAuthor);
@@ -83,7 +81,7 @@ public class Book {
       if (Book_Author != null)
       {
          Author oldAuthor;
-         for (Iterator iter = getIteratorBook_Author(); iter.hasNext();)
+         for (java.util.Iterator iter = getIteratorBook_Author(); iter.hasNext();)
          {
             oldAuthor = (Author)iter.next();
             iter.remove();
@@ -92,24 +90,24 @@ public class Book {
       }
    }
    /** @pdGenerated default getter */
-   public Collection<Category> getBook_Category() {
+   public java.util.Collection<Category> getBook_Category() {
       if (Book_Category == null)
-         Book_Category = new HashSet<Category>();
+         Book_Category = new java.util.HashSet<Category>();
       return Book_Category;
    }
    
    /** @pdGenerated default iterator getter */
-   public Iterator getIteratorBook_Category() {
+   public java.util.Iterator getIteratorBook_Category() {
       if (Book_Category == null)
-         Book_Category = new HashSet<Category>();
+         Book_Category = new java.util.HashSet<Category>();
       return Book_Category.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newBook_Category */
-   public void setBook_Category(Collection<Category> newBook_Category) {
+   public void setBook_Category(java.util.Collection<Category> newBook_Category) {
       removeAllBook_Category();
-      for (Iterator iter = newBook_Category.iterator(); iter.hasNext();)
+      for (java.util.Iterator iter = newBook_Category.iterator(); iter.hasNext();)
          addBook_Category((Category)iter.next());
    }
    
@@ -119,7 +117,7 @@ public class Book {
       if (newCategory == null)
          return;
       if (this.Book_Category == null)
-         this.Book_Category = new HashSet<Category>();
+         this.Book_Category = new java.util.HashSet<Category>();
       if (!this.Book_Category.contains(newCategory))
       {
          this.Book_Category.add(newCategory);
@@ -145,11 +143,73 @@ public class Book {
       if (Book_Category != null)
       {
          Category oldCategory;
-         for (Iterator iter = getIteratorBook_Category(); iter.hasNext();)
+         for (java.util.Iterator iter = getIteratorBook_Category(); iter.hasNext();)
          {
             oldCategory = (Category)iter.next();
             iter.remove();
             oldCategory.removeBook_Category(this);
+         }
+      }
+   }
+   /** @pdGenerated default getter */
+   public java.util.Collection<Copy> getCopy() {
+      if (copy == null)
+         copy = new java.util.HashSet<Copy>();
+      return copy;
+   }
+   
+   /** @pdGenerated default iterator getter */
+   public java.util.Iterator getIteratorCopy() {
+      if (copy == null)
+         copy = new java.util.HashSet<Copy>();
+      return copy.iterator();
+   }
+   
+   /** @pdGenerated default setter
+     * @param newCopy */
+   public void setCopy(java.util.Collection<Copy> newCopy) {
+      removeAllCopy();
+      for (java.util.Iterator iter = newCopy.iterator(); iter.hasNext();)
+         addCopy((Copy)iter.next());
+   }
+   
+   /** @pdGenerated default add
+     * @param newCopy */
+   public void addCopy(Copy newCopy) {
+      if (newCopy == null)
+         return;
+      if (this.copy == null)
+         this.copy = new java.util.HashSet<Copy>();
+      if (!this.copy.contains(newCopy))
+      {
+         this.copy.add(newCopy);
+         newCopy.setBook(this);      
+      }
+   }
+   
+   /** @pdGenerated default remove
+     * @param oldCopy */
+   public void removeCopy(Copy oldCopy) {
+      if (oldCopy == null)
+         return;
+      if (this.copy != null)
+         if (this.copy.contains(oldCopy))
+         {
+            this.copy.remove(oldCopy);
+            oldCopy.setBook((Book)null);
+         }
+   }
+   
+   /** @pdGenerated default removeAll */
+   public void removeAllCopy() {
+      if (copy != null)
+      {
+         Copy oldCopy;
+         for (java.util.Iterator iter = getIteratorCopy(); iter.hasNext();)
+         {
+            oldCopy = (Copy)iter.next();
+            iter.remove();
+            oldCopy.setBook((Book)null);
          }
       }
    }
@@ -173,29 +233,6 @@ public class Book {
          {
             this.publisher = newPublisher;
             this.publisher.addBook(this);
-         }
-      }
-   }
-   /** @pdGenerated default parent getter */
-   public Copy getCopy() {
-      return copy;
-   }
-   
-   /** @pdGenerated default parent setter
-     * @param newCopy */
-   public void setCopy(Copy newCopy) {
-      if (this.copy == null || !this.copy.equals(newCopy))
-      {
-         if (this.copy != null)
-         {
-            Copy oldCopy = this.copy;
-            this.copy = null;
-            oldCopy.removeBook(this);
-         }
-         if (newCopy != null)
-         {
-            this.copy = newCopy;
-            this.copy.addBook(this);
          }
       }
    }

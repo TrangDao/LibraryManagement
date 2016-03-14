@@ -1,18 +1,18 @@
 package com.lib.domain; /***********************************************************************
- * Module:  History.java
- * Author:  lanhnguyen
- * Purpose: Defines the Class History
+ * Module:  com.lib.domain.History.java
+ * com.lib.domain.Author:  lanhnguyen
+ * Purpose: Defines the Class com.lib.domain.History
  ***********************************************************************/
 
 import java.util.*;
 
-/** @pdOid 93842a69-cb6f-4760-92b8-beb8d50792e3 */
+/** @pdOid 166c6a46-7d4d-4c5c-b173-f6c06ae78d23 */
 public class History {
-   /** @pdOid 7f2c9119-1f85-4a34-bd27-23f09f1dfef7 */
+   /** @pdOid 92cb5040-c102-41bd-9a09-34e0cf2070c5 */
    public long hId;
-   /** @pdOid 18aef250-a4a0-4c22-9917-2429caab119f */
-   public Date hBorrow;
-   /** @pdOid f183feda-e0d0-4a5c-b0a4-0a8d89046e70 */
-   public Date hReturn;
+   /** @pdOid 33cda4bd-97e8-4496-8f04-eedc55bd76c1 */
+   public java.util.Date hBorrow;
+   /** @pdOid b706de9d-9358-4a8e-8973-433974e9471e */
+   public java.util.Date hReturn;
 
 }

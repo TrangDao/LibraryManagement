@@ -1,47 +1,45 @@
 package com.lib.domain; /***********************************************************************
- * Module:  Borrow.java
- * Author:  lanhnguyen
- * Purpose: Defines the Class Borrow
+ * Module:  com.lib.domain.Borrow.java
+ * com.lib.domain.Author:  lanhnguyen
+ * Purpose: Defines the Class com.lib.domain.Borrow
  ***********************************************************************/
 
-import java.util.*;
-
-/** @pdOid 2378f1c1-9fa4-458a-9b6d-0b415ccc0c78 */
+/** @pdOid ed64c994-6e0a-4b72-a21a-f404df2e18d6 */
 public class Borrow {
-   /** @pdOid 693de9bf-a8f0-46a5-a175-e505978c29b3 */
+   /** @pdOid 1693a967-b0e2-4a50-81ee-e7f8df19735e */
    public long bId;
-   /** @pdOid 11e183fd-b010-41e8-ac5c-e50a2f78d3d7 */
-   public Date bDate;
+   /** @pdOid 1863eca1-bb00-43c8-8bdd-079b2ada035e */
+   public java.util.Date bDate;
    
-   /** @pdRoleInfo migr=no name=Copy assc=borrowCopy coll=java.util.Collection impl=java.util.HashSet mult=0..* */
-   public Collection<Copy> copy;
-   /** @pdRoleInfo migr=no name=BorrowDetail assc=borrowDetail coll=java.util.Collection impl=java.util.HashSet mult=0..* */
-   public Collection<BorrowDetail> borrowDetail;
-   /** @pdRoleInfo migr=no name=Members assc=memberBrrow mult=0..1 side=A */
-   public Members members;
-   /** @pdRoleInfo migr=no name=User assc=userBorrow mult=0..1 side=A */
-   public User user;
+   /** @pdRoleInfo migr=no name=com.lib.domain.Copy assc=borrowCopy coll=java.util.Collection impl=java.util.HashSet mult=0..* */
+   public java.util.Collection<Copy> copy;
+   /** @pdRoleInfo migr=no name=com.lib.domain.BorrowDetail assc=borrowDetail coll=java.util.Collection impl=java.util.HashSet mult=0..* */
+   public java.util.Collection<BorrowDetail> borrowDetail;
+   /** @pdRoleInfo migr=no name=com.lib.domain.Member assc=memberBrrow mult=0..1 side=A */
+   public Member member;
+   /** @pdRoleInfo migr=no name=com.lib.domain.Staff assc=userBorrow mult=0..1 side=A */
+   public Staff staff;
    
    
    /** @pdGenerated default getter */
-   public Collection<Copy> getCopy() {
+   public java.util.Collection<Copy> getCopy() {
       if (copy == null)
-         copy = new HashSet<Copy>();
+         copy = new java.util.HashSet<Copy>();
       return copy;
    }
    
    /** @pdGenerated default iterator getter */
-   public Iterator getIteratorCopy() {
+   public java.util.Iterator getIteratorCopy() {
       if (copy == null)
-         copy = new HashSet<Copy>();
+         copy = new java.util.HashSet<Copy>();
       return copy.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newCopy */
-   public void setCopy(Collection<Copy> newCopy) {
+   public void setCopy(java.util.Collection<Copy> newCopy) {
       removeAllCopy();
-      for (Iterator iter = newCopy.iterator(); iter.hasNext();)
+      for (java.util.Iterator iter = newCopy.iterator(); iter.hasNext();)
          addCopy((Copy)iter.next());
    }
    
@@ -51,7 +49,7 @@ public class Borrow {
       if (newCopy == null)
          return;
       if (this.copy == null)
-         this.copy = new HashSet<Copy>();
+         this.copy = new java.util.HashSet<Copy>();
       if (!this.copy.contains(newCopy))
       {
          this.copy.add(newCopy);
@@ -77,7 +75,7 @@ public class Borrow {
       if (copy != null)
       {
          Copy oldCopy;
-         for (Iterator iter = getIteratorCopy(); iter.hasNext();)
+         for (java.util.Iterator iter = getIteratorCopy(); iter.hasNext();)
          {
             oldCopy = (Copy)iter.next();
             iter.remove();
@@ -86,24 +84,24 @@ public class Borrow {
       }
    }
    /** @pdGenerated default getter */
-   public Collection<BorrowDetail> getBorrowDetail() {
+   public java.util.Collection<BorrowDetail> getBorrowDetail() {
       if (borrowDetail == null)
-         borrowDetail = new HashSet<BorrowDetail>();
+         borrowDetail = new java.util.HashSet<BorrowDetail>();
       return borrowDetail;
    }
    
    /** @pdGenerated default iterator getter */
-   public Iterator getIteratorBorrowDetail() {
+   public java.util.Iterator getIteratorBorrowDetail() {
       if (borrowDetail == null)
-         borrowDetail = new HashSet<BorrowDetail>();
+         borrowDetail = new java.util.HashSet<BorrowDetail>();
       return borrowDetail.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newBorrowDetail */
-   public void setBorrowDetail(Collection<BorrowDetail> newBorrowDetail) {
+   public void setBorrowDetail(java.util.Collection<BorrowDetail> newBorrowDetail) {
       removeAllBorrowDetail();
-      for (Iterator iter = newBorrowDetail.iterator(); iter.hasNext();)
+      for (java.util.Iterator iter = newBorrowDetail.iterator(); iter.hasNext();)
          addBorrowDetail((BorrowDetail)iter.next());
    }
    
@@ -113,7 +111,7 @@ public class Borrow {
       if (newBorrowDetail == null)
          return;
       if (this.borrowDetail == null)
-         this.borrowDetail = new HashSet<BorrowDetail>();
+         this.borrowDetail = new java.util.HashSet<BorrowDetail>();
       if (!this.borrowDetail.contains(newBorrowDetail))
       {
          this.borrowDetail.add(newBorrowDetail);
@@ -139,7 +137,7 @@ public class Borrow {
       if (borrowDetail != null)
       {
          BorrowDetail oldBorrowDetail;
-         for (Iterator iter = getIteratorBorrowDetail(); iter.hasNext();)
+         for (java.util.Iterator iter = getIteratorBorrowDetail(); iter.hasNext();)
          {
             oldBorrowDetail = (BorrowDetail)iter.next();
             iter.remove();
@@ -148,48 +146,48 @@ public class Borrow {
       }
    }
    /** @pdGenerated default parent getter */
-   public Members getMembers() {
-      return members;
+   public Member getMember() {
+      return member;
    }
    
    /** @pdGenerated default parent setter
-     * @param newMembers */
-   public void setMembers(Members newMembers) {
-      if (this.members == null || !this.members.equals(newMembers))
+     * @param newMember */
+   public void setMember(Member newMember) {
+      if (this.member == null || !this.member.equals(newMember))
       {
-         if (this.members != null)
+         if (this.member != null)
          {
-            Members oldMembers = this.members;
-            this.members = null;
-            oldMembers.removeBorrow(this);
+            Member oldMember = this.member;
+            this.member = null;
+            oldMember.removeBorrow(this);
          }
-         if (newMembers != null)
+         if (newMember != null)
          {
-            this.members = newMembers;
-            this.members.addBorrow(this);
+            this.member = newMember;
+            this.member.addBorrow(this);
          }
       }
    }
    /** @pdGenerated default parent getter */
-   public User getUser() {
-      return user;
+   public Staff getStaff() {
+      return staff;
    }
    
    /** @pdGenerated default parent setter
-     * @param newUser */
-   public void setUser(User newUser) {
-      if (this.user == null || !this.user.equals(newUser))
+     * @param newStaff */
+   public void setStaff(Staff newStaff) {
+      if (this.staff == null || !this.staff.equals(newStaff))
       {
-         if (this.user != null)
+         if (this.staff != null)
          {
-            User oldUser = this.user;
-            this.user = null;
-            oldUser.removeBorrow(this);
+            Staff oldStaff = this.staff;
+            this.staff = null;
+            oldStaff.removeBorrow(this);
          }
-         if (newUser != null)
+         if (newStaff != null)
          {
-            this.user = newUser;
-            this.user.addBorrow(this);
+            this.staff = newStaff;
+            this.staff.addBorrow(this);
          }
       }
    }
