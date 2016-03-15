@@ -1,240 +1,65 @@
 package com.lib.domain; /***********************************************************************
- * Module:  com.lib.domain.Book.java
- * com.lib.domain.Author:  lanhnguyen
- * Purpose: Defines the Class com.lib.domain.Book
+ * Module:  Book.java
+ * Author:  lanhnguyen
+ * Purpose: Defines the Class Book
  ***********************************************************************/
 
-/** @pdOid 56b9b7dc-0895-4fff-b390-40502c310ff7 */
+import java.util.*;
+
+/** @pdOid 67e2b470-e58d-45d0-9ed7-8ee728168040 */
 public class Book {
-   /** @pdOid ce99b3eb-53b4-47bf-b1d9-bfb215d9dc61 */
-   public long bId;
-   /** @pdOid 684d5ea4-71f8-4afd-bb06-84b0f2b766c0 */
-   public java.lang.String bTitle;
-   /** @pdOid 9f7731f1-27bc-47b7-99b4-a509abe9ca43 */
-   public java.util.Date bDate;
-   /** @pdOid 6d4c3f03-7516-4756-a681-9ff3cda02caf */
-   public boolean bIsActive;
-   /** @pdOid 22a01f3d-be8e-4ff3-8f2b-49d3390b55f4 */
-   public int bQuantity;
+   /** @pdOid d74e95f0-595b-4b74-8f9e-63fdde79281d */
+   private String bName;
+   /** @pdOid e21bd25d-5abc-470e-940b-1e54eb997540 */
+   private String bAuthor;
+   /** @pdOid fa73c052-5e75-4c44-b78d-f82a09920335 */
+   private String bCategory;
    
-   /** @pdRoleInfo migr=no name=com.lib.domain.Author assc=bookAuthor coll=java.util.Collection impl=java.util.HashSet mult=1..* */
-   public java.util.Collection<Author> Book_Author;
-   /** @pdRoleInfo migr=no name=com.lib.domain.Category assc=bookCategory coll=java.util.Collection impl=java.util.HashSet mult=1..* */
-   public java.util.Collection<Category> Book_Category;
-   /** @pdRoleInfo migr=no name=com.lib.domain.Copy assc=copyBook coll=java.util.Collection impl=java.util.HashSet mult=1..* */
-   public java.util.Collection<Copy> copy;
-   /** @pdRoleInfo migr=no name=com.lib.domain.Publisher assc=bookPub mult=1..1 side=A */
-   public Publisher publisher;
+   /** @pdOid d2ee3b11-67d0-4e84-925a-5eca4a16fba7 */
+   public int bId;
    
-   
-   /** @pdGenerated default getter */
-   public java.util.Collection<Author> getBook_Author() {
-      if (Book_Author == null)
-         Book_Author = new java.util.HashSet<Author>();
-      return Book_Author;
+   /** @pdOid 06bb7302-7356-4e2d-b560-00c9b8e2788c */
+   public int getBId() {
+      return bId;
    }
    
-   /** @pdGenerated default iterator getter */
-   public java.util.Iterator getIteratorBook_Author() {
-      if (Book_Author == null)
-         Book_Author = new java.util.HashSet<Author>();
-      return Book_Author.iterator();
+   /** @param newBId
+    * @pdOid 20bb3143-c47c-431d-aa12-29c586ff8832 */
+   public void setBId(int newBId) {
+      bId = newBId;
    }
    
-   /** @pdGenerated default setter
-     * @param newBook_Author */
-   public void setBook_Author(java.util.Collection<Author> newBook_Author) {
-      removeAllBook_Author();
-      for (java.util.Iterator iter = newBook_Author.iterator(); iter.hasNext();)
-         addBook_Author((Author)iter.next());
+   /** @pdOid e3d1bce2-812c-4075-87b8-9f9d91d53c09 */
+   public String getBName() {
+      return bName;
    }
    
-   /** @pdGenerated default add
-     * @param newAuthor */
-   public void addBook_Author(Author newAuthor) {
-      if (newAuthor == null)
-         return;
-      if (this.Book_Author == null)
-         this.Book_Author = new java.util.HashSet<Author>();
-      if (!this.Book_Author.contains(newAuthor))
-      {
-         this.Book_Author.add(newAuthor);
-         newAuthor.addBook_Author(this);      
-      }
+   /** @param newBName
+    * @pdOid 5a9dbafd-9e23-431b-aec5-6af10f9e4cf7 */
+   public void setBName(String newBName) {
+      bName = newBName;
    }
    
-   /** @pdGenerated default remove
-     * @param oldAuthor */
-   public void removeBook_Author(Author oldAuthor) {
-      if (oldAuthor == null)
-         return;
-      if (this.Book_Author != null)
-         if (this.Book_Author.contains(oldAuthor))
-         {
-            this.Book_Author.remove(oldAuthor);
-            oldAuthor.removeBook_Author(this);
-         }
+   /** @pdOid a4ba374c-c6b0-45fb-ac9c-871cc2ea8228 */
+   public String getBAuthor() {
+      return bAuthor;
    }
    
-   /** @pdGenerated default removeAll */
-   public void removeAllBook_Author() {
-      if (Book_Author != null)
-      {
-         Author oldAuthor;
-         for (java.util.Iterator iter = getIteratorBook_Author(); iter.hasNext();)
-         {
-            oldAuthor = (Author)iter.next();
-            iter.remove();
-            oldAuthor.removeBook_Author(this);
-         }
-      }
-   }
-   /** @pdGenerated default getter */
-   public java.util.Collection<Category> getBook_Category() {
-      if (Book_Category == null)
-         Book_Category = new java.util.HashSet<Category>();
-      return Book_Category;
+   /** @param newBAuthor
+    * @pdOid c9cb647a-e0b1-4a7a-9a8f-ad5cd530686a */
+   public void setBAuthor(String newBAuthor) {
+      bAuthor = newBAuthor;
    }
    
-   /** @pdGenerated default iterator getter */
-   public java.util.Iterator getIteratorBook_Category() {
-      if (Book_Category == null)
-         Book_Category = new java.util.HashSet<Category>();
-      return Book_Category.iterator();
+   /** @pdOid fc979cf3-0a33-48cb-81fa-3488983a1d61 */
+   public String getBCategory() {
+      return bCategory;
    }
    
-   /** @pdGenerated default setter
-     * @param newBook_Category */
-   public void setBook_Category(java.util.Collection<Category> newBook_Category) {
-      removeAllBook_Category();
-      for (java.util.Iterator iter = newBook_Category.iterator(); iter.hasNext();)
-         addBook_Category((Category)iter.next());
-   }
-   
-   /** @pdGenerated default add
-     * @param newCategory */
-   public void addBook_Category(Category newCategory) {
-      if (newCategory == null)
-         return;
-      if (this.Book_Category == null)
-         this.Book_Category = new java.util.HashSet<Category>();
-      if (!this.Book_Category.contains(newCategory))
-      {
-         this.Book_Category.add(newCategory);
-         newCategory.addBook_Category(this);      
-      }
-   }
-   
-   /** @pdGenerated default remove
-     * @param oldCategory */
-   public void removeBook_Category(Category oldCategory) {
-      if (oldCategory == null)
-         return;
-      if (this.Book_Category != null)
-         if (this.Book_Category.contains(oldCategory))
-         {
-            this.Book_Category.remove(oldCategory);
-            oldCategory.removeBook_Category(this);
-         }
-   }
-   
-   /** @pdGenerated default removeAll */
-   public void removeAllBook_Category() {
-      if (Book_Category != null)
-      {
-         Category oldCategory;
-         for (java.util.Iterator iter = getIteratorBook_Category(); iter.hasNext();)
-         {
-            oldCategory = (Category)iter.next();
-            iter.remove();
-            oldCategory.removeBook_Category(this);
-         }
-      }
-   }
-   /** @pdGenerated default getter */
-   public java.util.Collection<Copy> getCopy() {
-      if (copy == null)
-         copy = new java.util.HashSet<Copy>();
-      return copy;
-   }
-   
-   /** @pdGenerated default iterator getter */
-   public java.util.Iterator getIteratorCopy() {
-      if (copy == null)
-         copy = new java.util.HashSet<Copy>();
-      return copy.iterator();
-   }
-   
-   /** @pdGenerated default setter
-     * @param newCopy */
-   public void setCopy(java.util.Collection<Copy> newCopy) {
-      removeAllCopy();
-      for (java.util.Iterator iter = newCopy.iterator(); iter.hasNext();)
-         addCopy((Copy)iter.next());
-   }
-   
-   /** @pdGenerated default add
-     * @param newCopy */
-   public void addCopy(Copy newCopy) {
-      if (newCopy == null)
-         return;
-      if (this.copy == null)
-         this.copy = new java.util.HashSet<Copy>();
-      if (!this.copy.contains(newCopy))
-      {
-         this.copy.add(newCopy);
-         newCopy.setBook(this);      
-      }
-   }
-   
-   /** @pdGenerated default remove
-     * @param oldCopy */
-   public void removeCopy(Copy oldCopy) {
-      if (oldCopy == null)
-         return;
-      if (this.copy != null)
-         if (this.copy.contains(oldCopy))
-         {
-            this.copy.remove(oldCopy);
-            oldCopy.setBook((Book)null);
-         }
-   }
-   
-   /** @pdGenerated default removeAll */
-   public void removeAllCopy() {
-      if (copy != null)
-      {
-         Copy oldCopy;
-         for (java.util.Iterator iter = getIteratorCopy(); iter.hasNext();)
-         {
-            oldCopy = (Copy)iter.next();
-            iter.remove();
-            oldCopy.setBook((Book)null);
-         }
-      }
-   }
-   /** @pdGenerated default parent getter */
-   public Publisher getPublisher() {
-      return publisher;
-   }
-   
-   /** @pdGenerated default parent setter
-     * @param newPublisher */
-   public void setPublisher(Publisher newPublisher) {
-      if (this.publisher == null || !this.publisher.equals(newPublisher))
-      {
-         if (this.publisher != null)
-         {
-            Publisher oldPublisher = this.publisher;
-            this.publisher = null;
-            oldPublisher.removeBook(this);
-         }
-         if (newPublisher != null)
-         {
-            this.publisher = newPublisher;
-            this.publisher.addBook(this);
-         }
-      }
+   /** @param newBCategory
+    * @pdOid 40dd9820-b646-428b-8840-3e8501322842 */
+   public void setBCategory(String newBCategory) {
+      bCategory = newBCategory;
    }
 
 }

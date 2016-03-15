@@ -1,38 +1,57 @@
 package com.lib.managebean;
 
-import com.lib.domain.Book;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import com.lib.service.BookService;
+import com.lib.service.BorrowService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by TR on 3/13/2016.
  */
+@Component
 @ManagedBean
-@ViewScoped
 public class BooksBean {
 
-    private List<Book> allBooks = new ArrayList<>();
+    @Autowired
+    private BookService bookService;
+
+    @Autowired
+    private BorrowService borrowService;
+
+    private Borrow borrow = new Borrow();
+
+    public Borrow getBorrow() {
+        return borrow;
+    }
+
+    public void setBorrow(Borrow borrow) {
+        this.borrow = borrow;
+    }
+
+    private List<String> allBooks = new ArrayList<>();
 
 
-
-    private Book book = new Book();
-
-    public List<Book> getAllBooks() {
+    public List<String> getAllBooks() {
         return allBooks;
     }
 
-    public void submitAddBook() {
-        allBooks.add(book);
+    public void setBookService(BookService bookService) {
+        this.bookService = bookService;
     }
 
-    public Book getBook() {
-        return book;
+    public BookService getBookService() {
+        return bookService;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void cc(){
+        bookService.findAll();
+    }
+
+    public int createBorrow(Borrow borrow){
+        return borrowService.createBorrow(borrow);
+
     }
 }
