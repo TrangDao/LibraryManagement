@@ -1,195 +1,65 @@
 package com.lib.domain; /***********************************************************************
- * Module:  com.lib.domain.Borrow.java
- * com.lib.domain.Author:  lanhnguyen
- * Purpose: Defines the Class com.lib.domain.Borrow
+ * Module:  Borrow.java
+ * Author:  lanhnguyen
+ * Purpose: Defines the Class Borrow
  ***********************************************************************/
 
-/** @pdOid ed64c994-6e0a-4b72-a21a-f404df2e18d6 */
+import java.util.*;
+
+/** @pdOid e0f4bb8d-b34c-4e5f-bb12-7ad26e026144 */
 public class Borrow {
-   /** @pdOid 1693a967-b0e2-4a50-81ee-e7f8df19735e */
-   public long bId;
-   /** @pdOid 1863eca1-bb00-43c8-8bdd-079b2ada035e */
-   public java.util.Date bDate;
+   /** @pdOid d227b160-d5f0-4c74-928c-b54df80b66e3 */
+   private Date brBorrowDate;
+   /** @pdOid d03107a1-8dad-494c-9410-d6293486b5ba */
+   private Date brCreateAt;
+   /** @pdOid 616c943d-856c-4a4d-8dc3-fc24c5187025 */
+   private Date brReturnDate;
    
-   /** @pdRoleInfo migr=no name=com.lib.domain.Copy assc=borrowCopy coll=java.util.Collection impl=java.util.HashSet mult=0..* */
-   public java.util.Collection<Copy> copy;
-   /** @pdRoleInfo migr=no name=com.lib.domain.BorrowDetail assc=borrowDetail coll=java.util.Collection impl=java.util.HashSet mult=0..* */
-   public java.util.Collection<BorrowDetail> borrowDetail;
-   /** @pdRoleInfo migr=no name=com.lib.domain.Member assc=memberBrrow mult=0..1 side=A */
-   public Member member;
-   /** @pdRoleInfo migr=no name=com.lib.domain.Staff assc=userBorrow mult=0..1 side=A */
-   public Staff staff;
+   /** @pdOid 6b627cad-b766-4b64-a213-74ac49a0c69b */
+   public int brId;
    
-   
-   /** @pdGenerated default getter */
-   public java.util.Collection<Copy> getCopy() {
-      if (copy == null)
-         copy = new java.util.HashSet<Copy>();
-      return copy;
+   /** @pdOid 3a5f9253-e27b-455a-889b-bda4a553c163 */
+   public int getBrId() {
+      return brId;
    }
    
-   /** @pdGenerated default iterator getter */
-   public java.util.Iterator getIteratorCopy() {
-      if (copy == null)
-         copy = new java.util.HashSet<Copy>();
-      return copy.iterator();
+   /** @param newBrId
+    * @pdOid cf29365d-b65c-48da-8ea0-b5ebfb301a34 */
+   public void setBrId(int newBrId) {
+      brId = newBrId;
    }
    
-   /** @pdGenerated default setter
-     * @param newCopy */
-   public void setCopy(java.util.Collection<Copy> newCopy) {
-      removeAllCopy();
-      for (java.util.Iterator iter = newCopy.iterator(); iter.hasNext();)
-         addCopy((Copy)iter.next());
+   /** @pdOid cc5aeee0-a5a9-4554-a782-9d5c89c63173 */
+   public Date getBrBorrowDate() {
+      return brBorrowDate;
    }
    
-   /** @pdGenerated default add
-     * @param newCopy */
-   public void addCopy(Copy newCopy) {
-      if (newCopy == null)
-         return;
-      if (this.copy == null)
-         this.copy = new java.util.HashSet<Copy>();
-      if (!this.copy.contains(newCopy))
-      {
-         this.copy.add(newCopy);
-         newCopy.setBorrow(this);      
-      }
+   /** @param newBrBorrowDate
+    * @pdOid 7bccb72b-9452-4e68-b480-3be5080c512c */
+   public void setBrBorrowDate(Date newBrBorrowDate) {
+      brBorrowDate = newBrBorrowDate;
    }
    
-   /** @pdGenerated default remove
-     * @param oldCopy */
-   public void removeCopy(Copy oldCopy) {
-      if (oldCopy == null)
-         return;
-      if (this.copy != null)
-         if (this.copy.contains(oldCopy))
-         {
-            this.copy.remove(oldCopy);
-            oldCopy.setBorrow((Borrow)null);
-         }
+   /** @pdOid 0393b71b-fbfc-4f63-8736-97b4f054d20c */
+   public Date getBrCreateAt() {
+      return brCreateAt;
    }
    
-   /** @pdGenerated default removeAll */
-   public void removeAllCopy() {
-      if (copy != null)
-      {
-         Copy oldCopy;
-         for (java.util.Iterator iter = getIteratorCopy(); iter.hasNext();)
-         {
-            oldCopy = (Copy)iter.next();
-            iter.remove();
-            oldCopy.setBorrow((Borrow)null);
-         }
-      }
-   }
-   /** @pdGenerated default getter */
-   public java.util.Collection<BorrowDetail> getBorrowDetail() {
-      if (borrowDetail == null)
-         borrowDetail = new java.util.HashSet<BorrowDetail>();
-      return borrowDetail;
+   /** @param newBrCreateAt
+    * @pdOid 6692d6e5-fec4-4858-bdb5-e4a4f9b3172d */
+   public void setBrCreateAt(Date newBrCreateAt) {
+      brCreateAt = newBrCreateAt;
    }
    
-   /** @pdGenerated default iterator getter */
-   public java.util.Iterator getIteratorBorrowDetail() {
-      if (borrowDetail == null)
-         borrowDetail = new java.util.HashSet<BorrowDetail>();
-      return borrowDetail.iterator();
+   /** @pdOid c5304806-7ad4-4dcc-a783-aaba841e8534 */
+   public Date getBrReturnDate() {
+      return brReturnDate;
    }
    
-   /** @pdGenerated default setter
-     * @param newBorrowDetail */
-   public void setBorrowDetail(java.util.Collection<BorrowDetail> newBorrowDetail) {
-      removeAllBorrowDetail();
-      for (java.util.Iterator iter = newBorrowDetail.iterator(); iter.hasNext();)
-         addBorrowDetail((BorrowDetail)iter.next());
-   }
-   
-   /** @pdGenerated default add
-     * @param newBorrowDetail */
-   public void addBorrowDetail(BorrowDetail newBorrowDetail) {
-      if (newBorrowDetail == null)
-         return;
-      if (this.borrowDetail == null)
-         this.borrowDetail = new java.util.HashSet<BorrowDetail>();
-      if (!this.borrowDetail.contains(newBorrowDetail))
-      {
-         this.borrowDetail.add(newBorrowDetail);
-         newBorrowDetail.setBorrow(this);      
-      }
-   }
-   
-   /** @pdGenerated default remove
-     * @param oldBorrowDetail */
-   public void removeBorrowDetail(BorrowDetail oldBorrowDetail) {
-      if (oldBorrowDetail == null)
-         return;
-      if (this.borrowDetail != null)
-         if (this.borrowDetail.contains(oldBorrowDetail))
-         {
-            this.borrowDetail.remove(oldBorrowDetail);
-            oldBorrowDetail.setBorrow((Borrow)null);
-         }
-   }
-   
-   /** @pdGenerated default removeAll */
-   public void removeAllBorrowDetail() {
-      if (borrowDetail != null)
-      {
-         BorrowDetail oldBorrowDetail;
-         for (java.util.Iterator iter = getIteratorBorrowDetail(); iter.hasNext();)
-         {
-            oldBorrowDetail = (BorrowDetail)iter.next();
-            iter.remove();
-            oldBorrowDetail.setBorrow((Borrow)null);
-         }
-      }
-   }
-   /** @pdGenerated default parent getter */
-   public Member getMember() {
-      return member;
-   }
-   
-   /** @pdGenerated default parent setter
-     * @param newMember */
-   public void setMember(Member newMember) {
-      if (this.member == null || !this.member.equals(newMember))
-      {
-         if (this.member != null)
-         {
-            Member oldMember = this.member;
-            this.member = null;
-            oldMember.removeBorrow(this);
-         }
-         if (newMember != null)
-         {
-            this.member = newMember;
-            this.member.addBorrow(this);
-         }
-      }
-   }
-   /** @pdGenerated default parent getter */
-   public Staff getStaff() {
-      return staff;
-   }
-   
-   /** @pdGenerated default parent setter
-     * @param newStaff */
-   public void setStaff(Staff newStaff) {
-      if (this.staff == null || !this.staff.equals(newStaff))
-      {
-         if (this.staff != null)
-         {
-            Staff oldStaff = this.staff;
-            this.staff = null;
-            oldStaff.removeBorrow(this);
-         }
-         if (newStaff != null)
-         {
-            this.staff = newStaff;
-            this.staff.addBorrow(this);
-         }
-      }
+   /** @param newBrReturnDate
+    * @pdOid 8c898cae-e2ba-41c4-832c-8a7dbec830b5 */
+   public void setBrReturnDate(Date newBrReturnDate) {
+      brReturnDate = newBrReturnDate;
    }
 
 }
