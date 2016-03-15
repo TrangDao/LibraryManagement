@@ -1,5 +1,7 @@
 package com.lib.managebean;
 
+import com.lib.domain.Book;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.util.ArrayList;
@@ -12,10 +14,25 @@ import java.util.List;
 @ViewScoped
 public class BooksBean {
 
-    private List<String> allBooks = new ArrayList<>();
+    private List<Book> allBooks = new ArrayList<>();
 
 
-    public List<String> getAllBooks() {
+
+    private Book book = new Book();
+
+    public List<Book> getAllBooks() {
         return allBooks;
+    }
+
+    public void submitAddBook() {
+        allBooks.add(book);
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }

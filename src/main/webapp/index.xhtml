@@ -41,7 +41,7 @@
                                         <h:outputLabel class="control-label pull-right">Title</h:outputLabel>
                                     </div>
                                     <div class="col-sm-6">
-                                        <h:inputText styleClass="form-control"></h:inputText>
+                                        <h:inputText styleClass="form-control" value="#{booksBean.book.bTitle}"></h:inputText>
                                     </div>
                                 </div>
                             </div>
@@ -87,11 +87,11 @@
                         <!--Button-->
                         <div class="row margin-top-20">
                             <div class="col-sm-6">
-                                <button class="col-sm-3 margin-bottom-20 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
-                                mdl-button--accent background-blue pull-right" onclick="hideAddNewBook()">
+                                <p:commandButton class="col-sm-3 margin-bottom-20 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
+                                mdl-button--accent background-blue pull-right" actionListener="#{booksBean.submitAddBook}" update=":booksTable" >
                                     <span class="glyphicon glyphicon-floppy-disk"/>
                                     Save
-                                </button>
+                                </p:commandButton>
                             </div>
                             <div class="col-sm-6">
                                 <button class="col-sm-3 margin-bottom-20 mdl-button mdl-js-button mdl-button--raised
@@ -187,7 +187,7 @@
                             </f:facet>
 
                             <p:column headerText="Id">
-                                <h:outputText value="#{book}"/>
+                                <h:outputText value="#{book.bTitle}"/>
                             </p:column>
 
                             <p:column headerText="Title">
