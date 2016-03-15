@@ -8,13 +8,12 @@ import java.util.*;
 
 /** @pdOid e09ed91f-1178-4ea4-85d9-1d44787ceb24 */
 public class Location {
+   /** @pdOid 83329ca4-ce77-4d01-b806-de1342156bb3 */
+   private int lId;
    /** @pdOid 8a0b217b-fed5-4c68-beaf-c7dc351cf814 */
    private String lName;
    /** @pdOid 9f7f2431-2971-4ad8-bd7d-900eb595edbe */
    private String lAddress;
-   
-   /** @pdOid 83329ca4-ce77-4d01-b806-de1342156bb3 */
-   public int lId;
    
    /** @pdRoleInfo migr=no name=Admin assc=locationAdmin coll=java.util.Collection impl=java.util.HashSet mult=0..* */
    public Collection<Admin> admin;

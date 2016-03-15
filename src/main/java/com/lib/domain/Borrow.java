@@ -8,6 +8,8 @@ import java.util.*;
 
 /** @pdOid e0f4bb8d-b34c-4e5f-bb12-7ad26e026144 */
 public class Borrow {
+   /** @pdOid 6b627cad-b766-4b64-a213-74ac49a0c69b */
+   private int brId;
    /** @pdOid d227b160-d5f0-4c74-928c-b54df80b66e3 */
    private Date brBorrowDate;
    /** @pdOid d03107a1-8dad-494c-9410-d6293486b5ba */
@@ -15,8 +17,8 @@ public class Borrow {
    /** @pdOid 616c943d-856c-4a4d-8dc3-fc24c5187025 */
    private Date brReturnDate;
    
-   /** @pdOid 6b627cad-b766-4b64-a213-74ac49a0c69b */
-   public int brId;
+   /** @pdRoleInfo migr=no name=Admin assc=adminBorrow mult=0..1 side=A */
+   public Admin admin;
    
    /** @pdOid 3a5f9253-e27b-455a-889b-bda4a553c163 */
    public int getBrId() {

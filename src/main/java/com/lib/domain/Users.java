@@ -8,15 +8,14 @@ import java.util.*;
 
 /** @pdOid 89e002ab-6c13-4ccc-be14-1ae8cd27d830 */
 public class Users {
+   /** @pdOid 1a68bc1b-b538-48c5-a887-f93022b8b71f */
+   private int uId;
    /** @pdOid fbdf6816-45c6-47ea-a13d-d070ad12e07d */
    private String uFirstname;
    /** @pdOid 8d3b9c9d-bb35-49a0-a9f3-50ecf77225aa */
    private String uLastname;
    /** @pdOid c74c5cdb-57f4-4e87-b7d6-3daed1745d24 */
    private int uSchool;
-   
-   /** @pdOid 1a68bc1b-b538-48c5-a887-f93022b8b71f */
-   public int uId;
    
    /** @pdRoleInfo migr=no name=Borrow assc=borrowUser coll=java.util.Collection impl=java.util.HashSet mult=0..* */
    public Collection<Borrow> borrow;

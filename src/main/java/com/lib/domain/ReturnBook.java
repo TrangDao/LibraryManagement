@@ -8,13 +8,15 @@ import java.util.*;
 
 /** @pdOid 5d3f7679-4991-49d8-a010-144c58c29b76 */
 public class ReturnBook {
+   /** @pdOid 494778ff-56d8-4f39-8513-608be6d5d795 */
+   private int rId;
    /** @pdOid b68b0c55-a188-41e5-aa10-77a5ce43946e */
    private Date rCreateAt;
    /** @pdOid a5869a71-1d04-4394-98fc-997afc653588 */
    private Date rReturnDate;
    
-   /** @pdOid 494778ff-56d8-4f39-8513-608be6d5d795 */
-   public int rId;
+   /** @pdRoleInfo migr=no name=Admin assc=adminReturn mult=0..1 side=A */
+   public Admin admin;
    
    /** @pdOid 5a86b9d8-ce7c-4540-b03d-b3cb8a86bdfc */
    public int getRId() {

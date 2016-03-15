@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 9.x                               */
-/* Created on:     15/03/2016 9:46:04 AM                        */
+/* Created on:     15/03/2016 1:56:10 PM                        */
 /*==============================================================*/
 
 
@@ -59,6 +59,8 @@ create table ADMIN (
    A_ID                 INT4                 not null,
    L_ID                 INT4                 null,
    A_ROLE               VARCHAR(100)         null,
+   A_FIRSTNAME          VARCHAR(200)         null,
+   A_LASTNAME           VARCHAR(200)         null,
    constraint PK_ADMIN primary key (A_ID)
 );
 
@@ -83,6 +85,7 @@ create table BOOK (
    B_ID                 INT4                 not null,
    B_NAME               VARCHAR(200)         null,
    B_AUTHOR             VARCHAR(2000)        null,
+   B_CATEGORY           VARCHAR(200)         null,
    constraint PK_BOOK primary key (B_ID)
 );
 
