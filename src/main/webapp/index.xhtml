@@ -6,20 +6,17 @@
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:body>
-    <h:form id="bookForm">
 
-        <ui:composition template="template/common.xhtml">
-            <ui:define name="content">
+
+    <ui:composition template="template/common.xhtml">
+        <ui:define name="content">
+            <h:form id="bookForm">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 title">Books Management</div>
                     </div>
+
                     <div class="row">
-                        <button class="margin-bottom-20 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
-                        mdl-button--accent background-blue" onclick="addBookOnClick()">
-                            <span class="glyphicon glyphicon-plus"/>
-                            Add
-                        </button>
 
                         <button class="margin-bottom-20 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
                         mdl-button--accent background-blue pull-right" onclick="showSearchBook()">
@@ -28,85 +25,9 @@
                         </button>
                     </div>
 
-                    <p:fieldset id="add-book-group" styleClass="row hidden">
-
-                        <h:outputLabel styleClass="sub-title">New book info</h:outputLabel>
-
-                        <!-- Row 1 -->
-                        <div class="form-horizontal form-group row">
-                            <!-- Title -->
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <h:outputLabel class="control-label pull-right">Title</h:outputLabel>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h:inputText styleClass="form-control"></h:inputText>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- com.lib.domain.Category -->
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <h:outputLabel styleClass="pull-right control-label">Category</h:outputLabel>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h:inputText styleClass="form-control"></h:inputText>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Row 2 -->
-                        <div class="form-group row">
-                            <!--com.lib.domain.Author-->
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <h:outputLabel styleClass="pull-right control-label">Author</h:outputLabel>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h:inputText styleClass="form-control"></h:inputText>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--com.lib.domain.Publisher-->
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <h:outputLabel styleClass="pull-right control-label">Publisher</h:outputLabel>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h:inputText styleClass="form-control"></h:inputText>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Button-->
-                        <div class="row margin-top-20">
-                            <div class="col-sm-6">
-                                <p:commandButton class="col-sm-3 margin-bottom-20 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
-                                mdl-button--accent background-blue pull-right" actionListener="#{booksBean.cc}"
-                                                 oncomplete="hideAddNewBook()">
-                                    <span class="glyphicon glyphicon-floppy-disk"/>
-                                    Save
-                                </p:commandButton>
-                            </div>
-                            <div class="col-sm-6">
-                                <button class="col-sm-3 margin-bottom-20 mdl-button mdl-js-button mdl-button--raised
-                                mdl-js-ripple-effect mdl-button--accent button-gray" onclick="hideAddNewBook()">
-                                    <span class="glyphicon glyphicon-remove"/>
-                                    Cancel
-                                </button>
-                            </div>
-                        </div>
-                    </p:fieldset>
-
 
                     <!-- Search input field -->
-                    <p:fieldset id="search-book-group" styleClass="row hidden">
+                    <p:fieldset id="search-book-group" styleClass="row">
                         <h:outputLabel styleClass="sub-title">Search criteria</h:outputLabel>
                         <!-- Row 1 -->
                         <div class="form-horizontal form-group row">
@@ -117,7 +38,7 @@
                                         <h:outputLabel class="control-label pull-right">Title</h:outputLabel>
                                     </div>
                                     <div class="col-sm-6">
-                                        <h:inputText styleClass="form-control"></h:inputText>
+                                        <p:inputText styleClass="form-control" value="#{booksBean.searchBookCriteria.name}"/>
                                     </div>
                                 </div>
                             </div>
@@ -126,10 +47,11 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <h:outputLabel
-                                                styleClass="pull-right control-label">com.lib.domain.Category</h:outputLabel>
+                                                styleClass="pull-right control-label">Category</h:outputLabel>
                                     </div>
                                     <div class="col-sm-6">
-                                        <h:inputText styleClass="form-control"></h:inputText>
+                                        <p:inputText styleClass="form-control"
+                                                     value="#{booksBean.searchBookCriteria.category}"></p:inputText>
                                     </div>
                                 </div>
                             </div>
@@ -142,35 +64,23 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <h:outputLabel
-                                                styleClass="pull-right control-label">com.lib.domain.Author</h:outputLabel>
+                                                styleClass="pull-right control-label">Author</h:outputLabel>
                                     </div>
                                     <div class="col-sm-6">
-                                        <h:inputText styleClass="form-control"></h:inputText>
+                                        <h:inputText styleClass="form-control"
+                                                     value="#{booksBean.searchBookCriteria.author}"></h:inputText>
                                     </div>
                                 </div>
                             </div>
-                            <!--com.lib.domain.Publisher-->
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <h:outputLabel
-                                                styleClass="pull-right control-label">com.lib.domain.Publisher</h:outputLabel>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h:inputText styleClass="form-control"></h:inputText>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
 
                         <!--Button-->
                         <div class="row margin-top-20">
                             <div class="col-sm-6">
-                                <button class="col-sm-3 margin-bottom-20 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
-                                mdl-button--accent background-blue pull-right" onclick="hideSearchBook()">
-                                    <span class="glyphicon glyphicon-search"/>
-                                    Search
-                                </button>
+
+                                <p:commandButton value="Search" actionListener="#{booksBean.searchBook}"
+                                                 update="booksTable"></p:commandButton>
                             </div>
                             <div class="col-sm-6">
                                 <button class="col-sm-3 margin-bottom-20 mdl-button mdl-js-button mdl-button--raised
@@ -182,8 +92,8 @@
                         </div>
                     </p:fieldset>
                     <div class="row margin-top-20">
-                        <p:dataTable var="book" value="#{booksBean.allBooks}" widgetVar="booksTable" paginator="true" rows="10"
-                                     selectionMode="Single" rowKey="#{book.BId}" >
+                        <p:dataTable var="book" value="#{booksBean.allBooks}" widgetVar="booksTable" id="booksTable"
+                                     selectionMode="Single" rowKey="#{book.BId}">
                             <f:facet name="header">
                                 <p:outputPanel>
                                     <h:outputText value="Search all fields"/>
@@ -192,7 +102,7 @@
                                 </p:outputPanel>
                             </f:facet>
                             <!--<p:ajax event="rowSelect" onstart="PF('bookDialog').show()"-->
-                                    <!--listener="#{booksBean.bookRowOnClick(book)}"/>-->
+                            <!--listener="#{booksBean.bookRowOnClick(book)}"/>-->
 
                             <p:column headerText="Id">
                                 <h:outputText value="#{book.BId}"/>
@@ -231,18 +141,17 @@
                         </p:dataTable>
                     </div>
 
-                    <p:dialog header="Selected Cars" id="bookDialog" widgetVar="bookDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="200">
+                    <p:dialog header="Selected Cars" id="bookDialog" widgetVar="bookDialog" modal="true"
+                              showEffect="fade" hideEffect="fade" resizable="false" width="200">
                         <p:outputPanel id="multiCarDetail" style="text-align:center;">
                             <h:outputLabel>abc</h:outputLabel>
                         </p:outputPanel>
                     </p:dialog>
                 </div>
 
-
-            </ui:define>
-        </ui:composition>
-
-    </h:form>
+            </h:form>
+        </ui:define>
+    </ui:composition>
 
 
 </h:body>
