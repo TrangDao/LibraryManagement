@@ -2,18 +2,24 @@ package com.lib.managebean;
 
 import com.lib.domain.Book;
 import com.lib.domain.Borrow;
+import com.lib.modelview.SearchBookCriteria;
 import com.lib.service.BookService;
 import com.lib.service.BorrowService;
 import com.lib.service.CopyService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by TR on 3/13/2016.
  */
+
 @Component
 @ManagedBean
 public class BooksBean {
@@ -27,7 +33,24 @@ public class BooksBean {
     @Autowired
     private CopyService copyService;
 
+    @PostConstruct
+    public void init() {
+        allBooks = bookService.findAll();
+       // searchBookCriteria.setName("b");
+    }
+    private Book newBook = new Book();
+
     private Borrow borrow = new Borrow();
+
+    private String name = "";
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Borrow getBorrow() {
         return borrow;
@@ -37,12 +60,14 @@ public class BooksBean {
         this.borrow = borrow;
     }
 
-    private List<String> allBooks = new ArrayList<>();
+    private List<Book> allBooks = new ArrayList<>();
+
+    private SearchBookCriteria searchBookCriteria = new SearchBookCriteria();
 
 
-    public List<Book> getAllBooks() {
-        return bookService.findAll();
-    }
+//    public List<Book> getAllBooks() {
+//        return bookService.findAll();
+//    }
 
     public int countCopy(int bookID){
         return copyService.sumCopyForBook(bookID);
@@ -60,9 +85,40 @@ public class BooksBean {
         return bookService;
     }
 
+    public void addNewBook() {
+        System.out.println("add");
+        System.out.println(bookService.addNewBook(newBook));
+    }
+
 
     public int createBorrow(Borrow borrow){
         return borrowService.createBorrow(borrow);
 
+    }
+
+    public Book getNewBook() {
+        return newBook;
+    }
+
+    public SearchBookCriteria getSearchBookCriteria() {
+        return searchBookCriteria;
+    }
+
+    public void setSearchBookCriteria(SearchBookCriteria searchBookCriteria) {
+        this.searchBookCriteria = searchBookCriteria;
+    }
+
+    public void searchBook() {
+        System.out.println("name: " + name);
+        System.out.println(searchBookCriteria.getAuthor());
+        System.out.println(searchBookCriteria.getCategory());
+        System.out.println(searchBookCriteria.getName());
+        allBooks = bookService.searchByCriteria(searchBookCriteria);
+
+        System.out.println(allBooks.size());
+    }
+
+    public List<Book> getAllBooks() {
+        return allBooks;
     }
 }
