@@ -1,8 +1,10 @@
 package com.lib.managebean;
 
+import com.lib.domain.Book;
 import com.lib.domain.Borrow;
 import com.lib.service.BookService;
 import com.lib.service.BorrowService;
+import com.lib.service.CopyService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -22,6 +24,9 @@ public class BooksBean {
     @Autowired
     private BorrowService borrowService;
 
+    @Autowired
+    private CopyService copyService;
+
     private Borrow borrow = new Borrow();
 
     public Borrow getBorrow() {
@@ -35,8 +40,16 @@ public class BooksBean {
     private List<String> allBooks = new ArrayList<>();
 
 
-    public List<String> getAllBooks() {
-        return allBooks;
+    public List<Book> getAllBooks() {
+        return bookService.findAll();
+    }
+
+    public int countCopy(int bookID){
+        return copyService.sumCopyForBook(bookID);
+    }
+
+    public boolean isAvailable(int bookID){
+        return  (copyService.sumCopyForBook(bookID) > 0);
     }
 
     public void setBookService(BookService bookService) {
@@ -47,9 +60,6 @@ public class BooksBean {
         return bookService;
     }
 
-    public void cc(){
-        bookService.findAll();
-    }
 
     public int createBorrow(Borrow borrow){
         return borrowService.createBorrow(borrow);

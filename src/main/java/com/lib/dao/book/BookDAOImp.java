@@ -1,4 +1,4 @@
-package com.lib.dao;
+package com.lib.dao.book;
 
 import com.lib.domain.Book;
 import java.util.List;
@@ -22,10 +22,15 @@ public class BookDAOImp implements BookDAO {
     }
     @Override
     public List<Book> findAll() {
-        System.out.println("zoooas");
         String sql ="SELECT * FROM book";
-
         List<Book> result = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Book.class));
         return result;
+    }
+
+    @Override
+    public int countBook(int ID) {
+
+        String sql = "SELECT count(copy.c_number) FROM book JOIN copy ON book.b_id = copy.b_id";
+        return 0;
     }
 }
