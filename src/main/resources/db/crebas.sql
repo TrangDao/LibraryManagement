@@ -1,10 +1,10 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 9.x                               */
-/* Created on:     15/03/2016 11:22:34 PM                       */
+/* Created on:     16/03/2016 9:42:15 PM                        */
 /*==============================================================*/
 
 
-drop index LOCATION_ADMIN_FK;
+drop index LOCATIONADMIN_FK;
 
 drop index ADMIN_PK;
 
@@ -14,17 +14,19 @@ drop index BOOK_PK;
 
 drop table BOOK;
 
-drop index ADMIN_BORROW_FK;
+drop index BORROWCOPY_FK;
 
-drop index BORROW_USER_FK;
+drop index ADMINBORROW_FK;
+
+drop index BORROWUSER_FK;
 
 drop index BORROW_PK;
 
 drop table BORROW;
 
-drop index LOCATION_COPY_FK;
+drop index LOCATIONCOPY_FK;
 
-drop index BOOK_COPY_FK;
+drop index BOOKCOPY_FK;
 
 drop index COPY_PK;
 
@@ -34,11 +36,11 @@ drop index LOCATION_PK;
 
 drop table LOCATION;
 
-drop index BORROW_RETURN_BOOK2_FK;
+drop index BORROWRETURNBOOK_FK;
 
-drop index ADMIN_RETURN_FK;
+drop index ADMINRETURN_FK;
 
-drop index USER_RETURN_FK;
+drop index USERRETURN_FK;
 
 drop index RETURN_BOOK_PK;
 
@@ -52,7 +54,7 @@ drop table USERS;
 /* Table: ADMIN                                                 */
 /*==============================================================*/
 create table ADMIN (
-   A_ID                 INT4                 not null,
+   A_ID                 SERIAL               not null,
    L_ID                 INT4                 null,
    A_ROLE               VARCHAR(100)         null,
    A_FIRSTNAME          VARCHAR(200)         null,
@@ -68,9 +70,9 @@ A_ID
 );
 
 /*==============================================================*/
-/* Index: LOCATION_ADMIN_FK                                     */
+/* Index: LOCATIONADMIN_FK                                      */
 /*==============================================================*/
-create  index LOCATION_ADMIN_FK on ADMIN (
+create  index LOCATIONADMIN_FK on ADMIN (
 L_ID
 );
 
@@ -78,7 +80,7 @@ L_ID
 /* Table: BOOK                                                  */
 /*==============================================================*/
 create table BOOK (
-   B_ID                 INT4                 not null,
+   B_ID                 SERIAL               not null,
    B_NAME               VARCHAR(200)         null,
    B_AUTHOR             VARCHAR(2000)        null,
    B_CATEGORY           VARCHAR(200)         null,
@@ -96,10 +98,11 @@ B_ID
 /* Table: BORROW                                                */
 /*==============================================================*/
 create table BORROW (
-   BR_ID                INT4                 not null,
+   BR_ID                SERIAL               not null,
    U_ID                 INT4                 null,
    A_ID                 INT4                 null,
    R_ID                 INT4                 null,
+   C_ID                 INT4                 null,
    BR_BORROW_DATE       DATE                 not null,
    BR_CREATE_AT         DATE                 not null,
    BR_RETURN_DATE       DATE                 not null,
@@ -114,27 +117,33 @@ BR_ID
 );
 
 /*==============================================================*/
-/* Index: BORROW_USER_FK                                        */
+/* Index: BORROWUSER_FK                                         */
 /*==============================================================*/
-create  index BORROW_USER_FK on BORROW (
+create  index BORROWUSER_FK on BORROW (
 U_ID
 );
 
 /*==============================================================*/
-/* Index: ADMIN_BORROW_FK                                       */
+/* Index: ADMINBORROW_FK                                        */
 /*==============================================================*/
-create  index ADMIN_BORROW_FK on BORROW (
+create  index ADMINBORROW_FK on BORROW (
 A_ID
+);
+
+/*==============================================================*/
+/* Index: BORROWCOPY_FK                                         */
+/*==============================================================*/
+create  index BORROWCOPY_FK on BORROW (
+C_ID
 );
 
 /*==============================================================*/
 /* Table: COPY                                                  */
 /*==============================================================*/
 create table COPY (
-   C_ID                 INT4                 not null,
-   L_ID                 INT4                 null,
+   C_ID                 SERIAL               not null,
    B_ID                 INT4                 null,
-   BR_ID                INT4                 null,
+   L_ID                 INT4                 null,
    C_NUMBER             INT4                 not null,
    constraint PK_COPY primary key (C_ID)
 );
@@ -147,16 +156,16 @@ C_ID
 );
 
 /*==============================================================*/
-/* Index: BOOK_COPY_FK                                          */
+/* Index: BOOKCOPY_FK                                           */
 /*==============================================================*/
-create  index BOOK_COPY_FK on COPY (
+create  index BOOKCOPY_FK on COPY (
 B_ID
 );
 
 /*==============================================================*/
-/* Index: LOCATION_COPY_FK                                      */
+/* Index: LOCATIONCOPY_FK                                       */
 /*==============================================================*/
-create  index LOCATION_COPY_FK on COPY (
+create  index LOCATIONCOPY_FK on COPY (
 L_ID
 );
 
@@ -164,7 +173,7 @@ L_ID
 /* Table: LOCATION                                              */
 /*==============================================================*/
 create table LOCATION (
-   L_ID                 INT4                 not null,
+   L_ID                 SERIAL               not null,
    L_NAME               VARCHAR(200)         null,
    L_ADDRESS            VARCHAR(200)         null,
    constraint PK_LOCATION primary key (L_ID)
@@ -181,10 +190,10 @@ L_ID
 /* Table: RETURN_BOOK                                           */
 /*==============================================================*/
 create table RETURN_BOOK (
-   R_ID                 INT4                 not null,
+   R_ID                 SERIAL               not null,
    U_ID                 INT4                 null,
-   A_ID                 INT4                 null,
    BR_ID                INT4                 not null,
+   A_ID                 INT4                 null,
    R_CREATE_AT          DATE                 not null,
    R_RETURN_DATE        DATE                 not null,
    constraint PK_RETURN_BOOK primary key (R_ID)
@@ -198,23 +207,23 @@ R_ID
 );
 
 /*==============================================================*/
-/* Index: USER_RETURN_FK                                        */
+/* Index: USERRETURN_FK                                         */
 /*==============================================================*/
-create  index USER_RETURN_FK on RETURN_BOOK (
+create  index USERRETURN_FK on RETURN_BOOK (
 U_ID
 );
 
 /*==============================================================*/
-/* Index: ADMIN_RETURN_FK                                       */
+/* Index: ADMINRETURN_FK                                        */
 /*==============================================================*/
-create  index ADMIN_RETURN_FK on RETURN_BOOK (
+create  index ADMINRETURN_FK on RETURN_BOOK (
 A_ID
 );
 
 /*==============================================================*/
-/* Index: BORROW_RETURN_BOOK2_FK                                */
+/* Index: BORROWRETURNBOOK_FK                                   */
 /*==============================================================*/
-create  index BORROW_RETURN_BOOK2_FK on RETURN_BOOK (
+create  index BORROWRETURNBOOK_FK on RETURN_BOOK (
 BR_ID
 );
 
@@ -222,7 +231,7 @@ BR_ID
 /* Table: USERS                                                 */
 /*==============================================================*/
 create table USERS (
-   U_ID                 INT4                 not null,
+   U_ID                 SERIAL               not null,
    U_FIRSTNAME          VARCHAR(200)         null,
    U_LASTNAME           VARCHAR(200)         null,
    U_SCHOOL             INT4                 null,
@@ -247,12 +256,17 @@ alter table BORROW
       on delete restrict on update restrict;
 
 alter table BORROW
-   add constraint FK_BORROW_BORROW_RE_RETURN_B foreign key (R_ID)
+   add constraint FK_BORROW_BORROWCOP_COPY foreign key (C_ID)
+      references COPY (C_ID)
+      on delete restrict on update restrict;
+
+alter table BORROW
+   add constraint FK_BORROW_BORROWRET_RETURN_B foreign key (R_ID)
       references RETURN_BOOK (R_ID)
       on delete restrict on update restrict;
 
 alter table BORROW
-   add constraint FK_BORROW_BORROW_US_USERS foreign key (U_ID)
+   add constraint FK_BORROW_BORROWUSE_USERS foreign key (U_ID)
       references USERS (U_ID)
       on delete restrict on update restrict;
 
@@ -262,27 +276,22 @@ alter table COPY
       on delete restrict on update restrict;
 
 alter table COPY
-   add constraint BR_CP foreign key (BR_ID)
-      references BORROW (BR_ID)
-      on delete restrict on update restrict;
-
-alter table COPY
    add constraint CP_L foreign key (L_ID)
       references LOCATION (L_ID)
       on delete restrict on update restrict;
 
 alter table RETURN_BOOK
-   add constraint FK_RETURN_B_ADMIN_RET_ADMIN foreign key (A_ID)
+   add constraint FK_RETURN_B_ADMINRETU_ADMIN foreign key (A_ID)
       references ADMIN (A_ID)
       on delete restrict on update restrict;
 
 alter table RETURN_BOOK
-   add constraint FK_RETURN_B_BORROW_RE_BORROW foreign key (BR_ID)
+   add constraint FK_RETURN_B_BORROWRET_BORROW foreign key (BR_ID)
       references BORROW (BR_ID)
       on delete restrict on update restrict;
 
 alter table RETURN_BOOK
-   add constraint FK_RETURN_B_USER_RETU_USERS foreign key (U_ID)
+   add constraint FK_RETURN_B_USERRETUR_USERS foreign key (U_ID)
       references USERS (U_ID)
       on delete restrict on update restrict;
 
