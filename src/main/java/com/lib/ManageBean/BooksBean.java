@@ -1,5 +1,6 @@
 package com.lib.managebean;
 
+import com.lib.domain.Borrow;
 import com.lib.service.BookService;
 import com.lib.service.BorrowService;
 import java.util.ArrayList;

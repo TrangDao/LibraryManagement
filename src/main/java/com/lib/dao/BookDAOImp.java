@@ -26,7 +26,6 @@ public class BookDAOImp implements BookDAO {
         String sql ="SELECT * FROM book";
 
         List<Book> result = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Book.class));
-        System.out.println("book : " + result.get(1).getBAuthor());
         return result;
     }
 }
