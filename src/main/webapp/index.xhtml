@@ -6,7 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:body>
-    <h:form>
+    <h:form id="bookForm">
 
         <ui:composition template="template/common.xhtml">
             <ui:define name="content">
@@ -88,7 +88,8 @@
                         <div class="row margin-top-20">
                             <div class="col-sm-6">
                                 <p:commandButton class="col-sm-3 margin-bottom-20 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
-                                mdl-button--accent background-blue pull-right" actionListener="#{booksBean.cc}" oncomplete="hideAddNewBook()">
+                                mdl-button--accent background-blue pull-right" actionListener="#{booksBean.cc}"
+                                                 oncomplete="hideAddNewBook()">
                                     <span class="glyphicon glyphicon-floppy-disk"/>
                                     Save
                                 </p:commandButton>
@@ -124,7 +125,8 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <h:outputLabel styleClass="pull-right control-label">com.lib.domain.Category</h:outputLabel>
+                                        <h:outputLabel
+                                                styleClass="pull-right control-label">com.lib.domain.Category</h:outputLabel>
                                     </div>
                                     <div class="col-sm-6">
                                         <h:inputText styleClass="form-control"></h:inputText>
@@ -139,7 +141,8 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <h:outputLabel styleClass="pull-right control-label">com.lib.domain.Author</h:outputLabel>
+                                        <h:outputLabel
+                                                styleClass="pull-right control-label">com.lib.domain.Author</h:outputLabel>
                                     </div>
                                     <div class="col-sm-6">
                                         <h:inputText styleClass="form-control"></h:inputText>
@@ -150,7 +153,8 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <h:outputLabel styleClass="pull-right control-label">com.lib.domain.Publisher</h:outputLabel>
+                                        <h:outputLabel
+                                                styleClass="pull-right control-label">com.lib.domain.Publisher</h:outputLabel>
                                     </div>
                                     <div class="col-sm-6">
                                         <h:inputText styleClass="form-control"></h:inputText>
@@ -178,13 +182,17 @@
                         </div>
                     </p:fieldset>
                     <div class="row margin-top-20">
-                        <p:dataTable var="book" value="#{booksBean.allBooks}" widgetVar="booksTable">
+                        <p:dataTable var="book" value="#{booksBean.allBooks}" widgetVar="booksTable" paginator="true" rows="10"
+                                     selectionMode="Single" rowKey="#{book.BId}" >
                             <f:facet name="header">
                                 <p:outputPanel>
-                                    <h:outputText value="Search all fields" />
-                                    <p:inputText id="globalFilter" onkeyup="PF('booksTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                                    <h:outputText value="Search all fields"/>
+                                    <p:inputText id="globalFilter" onkeyup="PF('booksTable').filter()"
+                                                 style="width:150px" placeholder="Enter keyword"/>
                                 </p:outputPanel>
                             </f:facet>
+                            <!--<p:ajax event="rowSelect" onstart="PF('bookDialog').show()"-->
+                                    <!--listener="#{booksBean.bookRowOnClick(book)}"/>-->
 
                             <p:column headerText="Id">
                                 <h:outputText value="#{book.BId}"/>
@@ -208,22 +216,29 @@
 
                             <p:column headerText="Detail">
                                 <!--TO DO: show location and number of copy in popup or anything else-->
+                                <p:commandButton value="Detail" onclick="PF('bookDialog').show(true)"></p:commandButton>
+
                             </p:column>
 
 
-
                             <!--<p:column headerText="Request">-->
-                                <!--<h:link value="Request" outcome="request" rendered="#{booksBean.isAvailable(book.BId)}">-->
-                                    <!--<f:param name="book" value="#{book}" />-->
-                                <!--</h:link>-->
-                                <!--<h:outputText value="Out Of Book"  rendered="#{!booksBean.isAvailable(book.BId)}"/>-->
+                            <!--<h:link value="Request" outcome="request" rendered="#{booksBean.isAvailable(book.BId)}">-->
+                            <!--<f:param name="book" value="#{book}" />-->
+                            <!--</h:link>-->
+                            <!--<h:outputText value="Out Of Book"  rendered="#{!booksBean.isAvailable(book.BId)}"/>-->
 
                             <!--</p:column>-->
                         </p:dataTable>
                     </div>
 
-
+                    <p:dialog header="Selected Cars" id="bookDialog" widgetVar="bookDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="200">
+                        <p:outputPanel id="multiCarDetail" style="text-align:center;">
+                            <h:outputLabel>abc</h:outputLabel>
+                        </p:outputPanel>
+                    </p:dialog>
                 </div>
+
+
             </ui:define>
         </ui:composition>
 
