@@ -17,6 +17,7 @@
 package com.lib;
 
 import com.lib.service.BookService;
+import com.lib.service.CopyService;
 import java.util.Arrays;
 import javax.faces.webapp.FacesServlet;
 
@@ -40,8 +41,8 @@ public class Main extends SpringBootServletInitializer {
 
         System.out.println("Let's inspect the beans provided by Spring Boot:");
 
-        BookService bookService = ctx.getBean(BookService.class);
-        bookService.findAll();
+        CopyService bookService = ctx.getBean(CopyService.class);
+        System.out.println("sumcopy " +bookService.sumCopyForBook(4));
 
         String[] beanNames = ctx.getBeanDefinitionNames();
         Arrays.sort(beanNames);

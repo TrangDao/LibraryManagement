@@ -1,4 +1,4 @@
-package com.lib.dao;
+package com.lib.dao.book;
 
 import com.lib.domain.Book;
 import java.util.List;
@@ -9,4 +9,6 @@ import java.util.List;
 public interface BookDAO {
 
     List<Book> findAll();
+
+    int countBook(int ID);
 }

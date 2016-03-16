@@ -49,7 +49,7 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <h:outputLabel styleClass="pull-right control-label">com.lib.domain.Category</h:outputLabel>
+                                        <h:outputLabel styleClass="pull-right control-label">Category</h:outputLabel>
                                     </div>
                                     <div class="col-sm-6">
                                         <h:inputText styleClass="form-control"></h:inputText>
@@ -64,7 +64,7 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <h:outputLabel styleClass="pull-right control-label">com.lib.domain.Author</h:outputLabel>
+                                        <h:outputLabel styleClass="pull-right control-label">Author</h:outputLabel>
                                     </div>
                                     <div class="col-sm-6">
                                         <h:inputText styleClass="form-control"></h:inputText>
@@ -75,7 +75,7 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <h:outputLabel styleClass="pull-right control-label">com.lib.domain.Publisher</h:outputLabel>
+                                        <h:outputLabel styleClass="pull-right control-label">Publisher</h:outputLabel>
                                     </div>
                                     <div class="col-sm-6">
                                         <h:inputText styleClass="form-control"></h:inputText>
@@ -187,23 +187,27 @@
                             </f:facet>
 
                             <p:column headerText="Id">
-                                <h:outputText value="#{book}"/>
+                                <h:outputText value="#{book.BId}"/>
                             </p:column>
 
-                            <p:column headerText="Title">
-                                <h:outputText value="#{book}"/>
+                            <p:column headerText="Name">
+                                <h:outputText value="#{book.BName}"/>
                             </p:column>
 
-                            <p:column headerText="com.lib.domain.Category">
-                                <h:outputText value="#{book}"/>
+                            <p:column headerText="Category">
+                                <h:outputText value="#{book.BCategory}"/>
                             </p:column>
 
-                            <p:column headerText="com.lib.domain.Author">
-                                <h:outputText value="#{book}"/>
+                            <p:column headerText="Author">
+                                <h:outputText value="#{book.BAuthor}"/>
                             </p:column>
 
-                            <p:column headerText="com.lib.domain.Publisher">
-                                <h:outputText value="#{book}"/>
+                            <p:column headerText="Request">
+                                <h:link value="Request" outcome="request" rendered="#{booksBean.isAvailable(book.BId)}">
+                                    <f:param name="book" value="#{book}" />
+                                </h:link>
+                                <h:outputText value="Out Of Book"  rendered="#{!booksBean.isAvailable(book.BId)}"/>
+
                             </p:column>
                         </p:dataTable>
                     </div>

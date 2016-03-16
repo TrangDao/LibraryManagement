@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 9.x                               */
-/* Created on:     15/03/2016 1:56:10 PM                        */
+/* Created on:     15/03/2016 11:22:34 PM                       */
 /*==============================================================*/
 
 
@@ -16,8 +16,6 @@ drop table BOOK;
 
 drop index ADMIN_BORROW_FK;
 
-drop index BORROW_COPY_FK;
-
 drop index BORROW_USER_FK;
 
 drop index BORROW_PK;
@@ -25,8 +23,6 @@ drop index BORROW_PK;
 drop table BORROW;
 
 drop index LOCATION_COPY_FK;
-
-drop index BORROW_COPY2_FK;
 
 drop index BOOK_COPY_FK;
 
@@ -104,7 +100,6 @@ create table BORROW (
    U_ID                 INT4                 null,
    A_ID                 INT4                 null,
    R_ID                 INT4                 null,
-   C_ID                 INT4                 null,
    BR_BORROW_DATE       DATE                 not null,
    BR_CREATE_AT         DATE                 not null,
    BR_RETURN_DATE       DATE                 not null,
@@ -123,13 +118,6 @@ BR_ID
 /*==============================================================*/
 create  index BORROW_USER_FK on BORROW (
 U_ID
-);
-
-/*==============================================================*/
-/* Index: BORROW_COPY_FK                                        */
-/*==============================================================*/
-create  index BORROW_COPY_FK on BORROW (
-C_ID
 );
 
 /*==============================================================*/
@@ -163,13 +151,6 @@ C_ID
 /*==============================================================*/
 create  index BOOK_COPY_FK on COPY (
 B_ID
-);
-
-/*==============================================================*/
-/* Index: BORROW_COPY2_FK                                       */
-/*==============================================================*/
-create  index BORROW_COPY2_FK on COPY (
-BR_ID
 );
 
 /*==============================================================*/
@@ -266,11 +247,6 @@ alter table BORROW
       on delete restrict on update restrict;
 
 alter table BORROW
-   add constraint BR_CP foreign key (C_ID)
-      references COPY (C_ID)
-      on delete restrict on update restrict;
-
-alter table BORROW
    add constraint FK_BORROW_BORROW_RE_RETURN_B foreign key (R_ID)
       references RETURN_BOOK (R_ID)
       on delete restrict on update restrict;
@@ -286,7 +262,7 @@ alter table COPY
       on delete restrict on update restrict;
 
 alter table COPY
-   add constraint CP_BR foreign key (BR_ID)
+   add constraint BR_CP foreign key (BR_ID)
       references BORROW (BR_ID)
       on delete restrict on update restrict;
 
