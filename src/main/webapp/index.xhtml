@@ -202,13 +202,23 @@
                                 <h:outputText value="#{book.BAuthor}"/>
                             </p:column>
 
-                            <p:column headerText="Request">
-                                <h:link value="Request" outcome="request" rendered="#{booksBean.isAvailable(book.BId)}">
-                                    <f:param name="book" value="#{book}" />
-                                </h:link>
-                                <h:outputText value="Out Of Book"  rendered="#{!booksBean.isAvailable(book.BId)}"/>
-
+                            <p:column headerText="Number">
+                                <h:outputText value="#{booksBean.countCopy(book.BId)}"/>
                             </p:column>
+
+                            <p:column headerText="Detail">
+                                <!--TO DO: show location and number of copy in popup or anything else-->
+                            </p:column>
+
+
+
+                            <!--<p:column headerText="Request">-->
+                                <!--<h:link value="Request" outcome="request" rendered="#{booksBean.isAvailable(book.BId)}">-->
+                                    <!--<f:param name="book" value="#{book}" />-->
+                                <!--</h:link>-->
+                                <!--<h:outputText value="Out Of Book"  rendered="#{!booksBean.isAvailable(book.BId)}"/>-->
+
+                            <!--</p:column>-->
                         </p:dataTable>
                     </div>
 
