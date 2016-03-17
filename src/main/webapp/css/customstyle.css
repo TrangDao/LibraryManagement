@@ -88,3 +88,7 @@ li.ui-state-default.ui-corner-left {
 div#content {
     margin-top: 5em;
 }
+
+.ui-datatable .ui-column-filter{
+    display:none !important;
+}

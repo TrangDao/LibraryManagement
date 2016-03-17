@@ -1,8 +1,12 @@
 package com.lib.dao.copy;
 
 import com.lib.domain.Copy;
+
 import java.util.List;
+
+import com.lib.domain.Location;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +25,7 @@ public class CopyDAOImp implements CopyDAO {
 
     @Override
     public List<Copy> getCopyByBookID(int ID) {
-        String sql ="SELECT * FROM book";
+        String sql = "SELECT * FROM book";
         return null;
     }
 
@@ -29,13 +33,38 @@ public class CopyDAOImp implements CopyDAO {
     public int countCopyForBook(int bookID) {
         String sql = "SELECT sum(c_number) FROM copy WHERE b_id = ?";
         Integer result = jdbcTemplate.queryForObject(sql, Integer.class, bookID);
-        if (result != null){
+        if (result != null) {
             return result;
         } else {
             return 0;
         }
+    }
 
+    @Override
+    public Copy getCopyByBookLocation(int bId, int selectedLocationId) {
+        String sql = "Select * from copy where b_id=? and l_id=? limit 1";
+        List<Copy> result = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Copy.class), bId, selectedLocationId);
+        if (result.size() > 0) {
+            return result.get(0);
+        }
+        return new Copy();
+    }
 
+    @Override
+    public int numCopyOfLocation(int bId, int selectedLocationId) {
+        String sql = "SELECT sum(c_number) FROM copy WHERE b_id=? and l_id =?";
+        Integer result = jdbcTemplate.queryForObject(sql, Integer.class, bId,  selectedLocationId);
+        if (result != null) {
+            return result;
+        }
+        return 0;
 
+    }
+
+    @Override
+    public int updateCopyNumber(Copy copy) {
+        String sql = "update copy set c_number=? where c_id=?";
+        System.out.println(sql);
+        return jdbcTemplate.update(sql, new Object[]{copy.cNumber, copy.cId});
     }
 }

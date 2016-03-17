@@ -12,4 +12,10 @@ public interface CopyDAO {
 
     List<Copy> getCopyByBookID(int ID);
     int countCopyForBook(int bookID);
+
+    Copy getCopyByBookLocation(int bId, int selectedLocationId);
+
+    int numCopyOfLocation(int bId, int selectedLocationId);
+
+    int updateCopyNumber(Copy copy);
 }

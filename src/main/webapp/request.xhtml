@@ -6,18 +6,191 @@
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:body>
-    <h:form>
-
-        <ui:composition template="template/common.xhtml">
-            <ui:define name="content">
+    <ui:composition template="template/common.xhtml">
+        <ui:define name="content">
+            <h:form styleClass="form-horizontal" id="requestForm">
                 <div class="container">
-                    <h:outputText value="#{borrowBean.cc}"/>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 title">Borrow Management</div>
+                    </div>
 
+
+                    <!-- Search input field -->
+                    <p:fieldset id="search-book-group" styleClass="row">
+                        <h:outputLabel styleClass="sub-title">Book info</h:outputLabel>
+                        <!-- Row 1 -->
+                        <div class="form-horizontal form-group row">
+                            <!-- Title -->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel class="control-label pull-right">Id </h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p:inputText styleClass="form-control" disabled="true"
+                                                     value="#{borrowBean.book.BId}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Title -->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel class="control-label pull-right">Author </h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p:inputText styleClass="form-control" disabled="true"
+                                                     value="#{borrowBean.book.BAuthor}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Row 2 -->
+                        <div class="form-horizontal form-group row">
+                            <!-- Title -->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel class="control-label pull-right">Title</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p:inputText styleClass="form-control" disabled="true"
+                                                     value="#{borrowBean.book.BName}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Title -->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel class="control-label pull-right">Category </h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p:inputText styleClass="form-control" disabled="true"
+                                                     value="#{borrowBean.book.BCategory}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <h:outputLabel styleClass="sub-title">Copy info</h:outputLabel>
+                        <!-- Row 1 -->
+                        <div class="form-horizontal form-group row">
+                            <!-- Title -->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel class="control-label pull-right">Location </h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p:selectOneMenu value="#{borrowBean.selectedLocationId}" style="width:160px">
+                                            <p:ajax listener="#{borrowBean.onLocationChange}"
+                                                    update=":requestForm:numCopy"/>
+                                            <f:selectItems value="#{borrowBean.listLocationId}"
+                                                           var="loc" itemLabel="#{borrowBean.getLocationName(loc)}"
+                                            />
+                                        </p:selectOneMenu>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Title -->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel
+                                                styleClass="pull-right control-label">Num of copy</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p:inputText styleClass="form-control" disabled="true" id="numCopy"
+                                                     value="#{borrowBean.countCopiesOfLocation}"></p:inputText>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <h:outputLabel styleClass="sub-title">Member info</h:outputLabel>
+                        <!-- Row 1 -->
+                        <div class="form-horizontal form-group row">
+                            <!-- Title -->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel class="control-label pull-right">Admin Id</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p:inputText styleClass="form-control" disabled="true"
+                                                     value="1"></p:inputText>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Title -->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel
+                                                styleClass="pull-right control-label">User Id</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p:inputText styleClass="form-control" disabled="true"
+                                                     value="1"></p:inputText>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Row 1 -->
+                        <div class="form-horizontal form-group row">
+                            <!-- Title -->
+                            <div class="col-sm-6">
+                                <p:commandButton value="Submit" styleClass="pull-right"
+                                                 update=":requestForm:numCopy :requestForm:error"
+                                                 actionListener="#{borrowBean.requestBorrow}"></p:commandButton>
+                            </div>
+
+                            <!--<div class="col-sm-6">-->
+                                <!--<h:outputText value="Choose Location with Num Of Copy > 0" id="error" rendered="#{!borrowBean.isError}"></h:outputText>-->
+                            <!--</div>-->
+                        </div>
+                    </p:fieldset>
+
+                    <div class="row margin-top-20">
+                        <p:dataTable var="borrow" value="#{borrowBean.allBorrow}" widgetVar="borrowTable" id="borrowTable"
+                                     selectionMode="Single" rowKey="#{borrow.brId}">
+                            <f:facet name="header">
+                                <p:outputPanel>
+                                    <h:outputText value="Search all fields"/>
+                                    <p:inputText id="globalFilter" onkeyup="PF('borrowTable').filter()"
+                                                 style="width:150px" placeholder="Enter keyword"/>
+                                </p:outputPanel>
+                            </f:facet>
+                            <!--<p:ajax event="rowSelect" onstart="PF('bookDialog').show()"-->
+                            <!--listener="#{booksBean.bookRowOnClick(book)}"/>-->
+
+                            <p:column headerText="Id">
+                                <h:outputText value="#{borrow.brId}"/>
+                            </p:column>
+
+                        </p:dataTable>
+                    </div>
                 </div>
-            </ui:define>
-        </ui:composition>
 
-    </h:form>
+
+
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
 
 
 </h:body>

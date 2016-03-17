@@ -33,6 +33,9 @@ public class BooksBean {
     @Autowired
     private CopyService copyService;
 
+    @Autowired
+    private BorrowBean borrowBean;
+
     @PostConstruct
     public void init() {
         allBooks = bookService.findAll();
@@ -90,6 +93,11 @@ public class BooksBean {
         System.out.println(bookService.addNewBook(newBook));
     }
 
+    public String borrowBook(Book book) {
+        borrowBean.setBook(book);
+        return "request.xhtml?faces-redirect=true";
+    }
+
 
     public int createBorrow(Borrow borrow){
         return borrowService.createBorrow(borrow);
@@ -109,13 +117,7 @@ public class BooksBean {
     }
 
     public void searchBook() {
-        System.out.println("name: " + name);
-        System.out.println(searchBookCriteria.getAuthor());
-        System.out.println(searchBookCriteria.getCategory());
-        System.out.println(searchBookCriteria.getName());
         allBooks = bookService.searchByCriteria(searchBookCriteria);
-
-        System.out.println(allBooks.size());
     }
 
     public List<Book> getAllBooks() {

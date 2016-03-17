@@ -16,15 +16,6 @@
                         <div class="col-md-12 col-sm-12 title">Books Management</div>
                     </div>
 
-                    <div class="row">
-
-                        <button class="margin-bottom-20 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
-                        mdl-button--accent background-blue pull-right" onclick="showSearchBook()">
-                            <span class="glyphicon glyphicon-search"/>
-                            Search
-                        </button>
-                    </div>
-
 
                     <!-- Search input field -->
                     <p:fieldset id="search-book-group" styleClass="row">
@@ -38,7 +29,8 @@
                                         <h:outputLabel class="control-label pull-right">Title</h:outputLabel>
                                     </div>
                                     <div class="col-sm-6">
-                                        <p:inputText styleClass="form-control" value="#{booksBean.searchBookCriteria.name}"/>
+                                        <p:inputText styleClass="form-control"
+                                                     value="#{booksBean.searchBookCriteria.name}"/>
                                     </div>
                                 </div>
                             </div>
@@ -80,14 +72,7 @@
                             <div class="col-sm-6">
 
                                 <p:commandButton value="Search" actionListener="#{booksBean.searchBook}"
-                                                 update="booksTable"></p:commandButton>
-                            </div>
-                            <div class="col-sm-6">
-                                <button class="col-sm-3 margin-bottom-20 mdl-button mdl-js-button mdl-button--raised
-                                mdl-js-ripple-effect mdl-button--accent button-gray" onclick="hideSearchBook()">
-                                    <span class="glyphicon glyphicon-remove"/>
-                                    Cancel
-                                </button>
+                                                 styleClass="pull-right" update="booksTable"></p:commandButton>
                             </div>
                         </div>
                     </p:fieldset>
@@ -104,41 +89,34 @@
                             <!--<p:ajax event="rowSelect" onstart="PF('bookDialog').show()"-->
                             <!--listener="#{booksBean.bookRowOnClick(book)}"/>-->
 
-                            <p:column headerText="Id">
+                            <p:column headerText="Id" filterBy="#{book.BId}" filterMatchMode="contains">
                                 <h:outputText value="#{book.BId}"/>
                             </p:column>
 
-                            <p:column headerText="Name">
+                            <p:column headerText="Name" filterBy="#{book.BName}" filterMatchMode="contains" >
                                 <h:outputText value="#{book.BName}"/>
                             </p:column>
 
-                            <p:column headerText="Category">
+                            <p:column headerText="Category" filterBy="#{book.BCategory}" filterMatchMode="contains">
                                 <h:outputText value="#{book.BCategory}"/>
                             </p:column>
 
-                            <p:column headerText="Author">
+                            <p:column headerText="Author" filterBy="#{book.BAuthor}" filterMatchMode="contains">
                                 <h:outputText value="#{book.BAuthor}"/>
                             </p:column>
 
-                            <p:column headerText="Number">
+                            <p:column headerText="Number" filterBy="#{booksBean.countCopy(book.BId)}" filterMatchMode="contains">
                                 <h:outputText value="#{booksBean.countCopy(book.BId)}"/>
                             </p:column>
 
-                            <p:column headerText="Borrow">
+                            <p:column>
                                 <!--TO DO: show location and number of copy in popup or anything else-->
-                                <p:commandButton value="Detail" onclick="PF('bookDialog').show(true)"></p:commandButton>
-
+                                <p:commandButton value="Order now" action="#{booksBean.borrowBook(book)}"
+                                                 rendered="#{booksBean.isAvailable(book.BId)}"></p:commandButton>
 
                             </p:column>
 
 
-                            <!--<p:column headerText="Request">-->
-                            <!--<h:link value="Request" outcome="request" rendered="#{booksBean.isAvailable(book.BId)}">-->
-                            <!--<f:param name="book" value="#{book}" />-->
-                            <!--</h:link>-->
-                            <!--<h:outputText value="Out Of Book"  rendered="#{!booksBean.isAvailable(book.BId)}"/>-->
-
-                            <!--</p:column>-->
                         </p:dataTable>
                     </div>
 
