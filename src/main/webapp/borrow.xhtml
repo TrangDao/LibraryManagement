@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+
+
+    <ui:composition template="template/common.xhtml">
+        <ui:define name="content">
+            <h:form id="bookForm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 title">Borrow Management</div>
+                    </div>
+
+
+                    <!-- Search input field -->
+                    <p:fieldset id="search-book-group" styleClass="row">
+                        <h:outputLabel styleClass="sub-title">Search criteria</h:outputLabel>
+                        <!-- Row 1 -->
+                        <div class="form-horizontal form-group row">
+                            <!-- Title -->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel class="control-label pull-right">Title</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p:inputText styleClass="form-control"
+                                                     value="#{booksBean.searchBookCriteria.name}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- com.lib.domain.Category -->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel
+                                                styleClass="pull-right control-label">Category</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p:inputText styleClass="form-control"
+                                                     value="#{booksBean.searchBookCriteria.category}"></p:inputText>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 2 -->
+                        <div class="form-group row">
+                            <!--com.lib.domain.Author-->
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel
+                                                styleClass="pull-right control-label">Author</h:outputLabel>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h:inputText styleClass="form-control"
+                                                     value="#{booksBean.searchBookCriteria.author}"></h:inputText>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!--Button-->
+                        <div class="row margin-top-20">
+                            <div class="col-sm-6">
+
+                                <p:commandButton value="Search" actionListener="#{booksBean.searchBook}"
+                                                 styleClass="pull-right" update="booksTable"></p:commandButton>
+                            </div>
+                        </div>
+                    </p:fieldset>
+                    <div class="row margin-top-20">
+                        <p:dataTable var="borrow" value="#{borrowMgBean.allBorrows}" widgetVar="booksTable"
+                                     id="booksTable"
+                                     selectionMode="Single" rowKey="#{borrow.brId}">
+
+                            <!--<p:ajax event="rowSelect" onstart="PF('bookDialog').show()"-->
+                            <!--listener="#{booksBean.bookRowOnClick(book)}"/>-->
+
+                            <p:column headerText="Id" filterBy="#{borrow.brId}" filterMatchMode="contains">
+                                <h:outputText value="#{borrow.brId}"/>
+                            </p:column>
+
+                            <p:column headerText="Name" filterBy="#{book.BName}" filterMatchMode="contains">
+                                <h:outputText value="#{borrowMgBean.getBookName(borrow.cId)}"/>
+                            </p:column>
+                            <p:column headerText="User First Name" filterBy="#{book.BName}" filterMatchMode="contains">
+                                <h:outputText value="#{borrowMgBean.getUser(borrow.uId)}"/>
+                            </p:column>
+
+                            <p:column headerText="Create At" filterBy="#{borrow.brCreateAt}" filterMatchMode="contains">
+                                <h:outputText value="#{borrow.brCreateAt}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Borrow Date" filterBy="#{borrow.brBorrowDate}"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{borrow.brBorrowDate}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Dead Line" filterBy="#{borrow.brReturnDate}"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{borrow.brReturnDate}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Return ID" filterBy="#{borrow.rId}" filterMatchMode="contains">
+                                <h:outputText value="#{borrow.rId}">
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column>
+                                <p:commandButton value="Return"
+                                                 rendered="#{!borrowMgBean.isReturned(borrow.rId)}"></p:commandButton>
+                                <!--TO DO: show location and number of copy in popup or anything else-->
+                                <p:commandButton value="Order now" action="#{booksBean.borrowBook(book)}"
+                                                 rendered="#{booksBean.isAvailable(book.BId)}"></p:commandButton>
+
+                            </p:column>
+
+
+                        </p:dataTable>
+                    </div>
+
+                    <p:dialog header="Selected Cars" id="bookDialog" widgetVar="bookDialog" modal="true"
+                              showEffect="fade" hideEffect="fade" resizable="false" width="200">
+                        <p:outputPanel id="multiCarDetail" style="text-align:center;">
+                            <h:outputLabel>abc</h:outputLabel>
+                        </p:outputPanel>
+                    </p:dialog>
+                </div>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+
+</h:body>
+</html>
