@@ -29,4 +29,8 @@ public class CopyService {
     public int updateCopyNumber(Copy copy) {
         return copyDAO.updateCopyNumber(copy);
     }
+
+    public Copy getCopyById(int cId) {
+        return copyDAO.getById(cId);
+    }
 }

@@ -1,15 +1,6 @@
 package com.lib.managebean;
 
 import com.lib.domain.Book;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
-
 import com.lib.domain.Borrow;
 import com.lib.domain.Copy;
 import com.lib.domain.Location;
@@ -17,8 +8,16 @@ import com.lib.modelview.BorrowModelView;
 import com.lib.service.BorrowService;
 import com.lib.service.CopyService;
 import com.lib.service.LocationService;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by lanhnguyen on 16/03/2016.
@@ -35,22 +34,22 @@ public class BorrowBean {
 
     @Autowired
     BorrowService borrowService;
+    private boolean isError = false;
+    private int selectedLocationId;
+    private Book book;
+    // private Copy copy = new Copy();
+    private List<Location> locations = new ArrayList<>();
+    private Map<Integer, String> mapLocation = new HashMap<>();
+    private List<Borrow> allBorrow = new ArrayList<>();
+    private List<Integer> listLocationId = new ArrayList<>();
+    private Copy copy = new Copy();
+    private int countCopiesOfLocation;
 
     @PostConstruct
     public void init() {
         book = new Book();
         allBorrow = borrowService.findAll();
     }
-
-    private boolean isError = false;
-
-    private int selectedLocationId;
-    private Book book;
-    // private Copy copy = new Copy();
-    private List<Location> locations = new ArrayList<>();
-    private Map<Integer, String> mapLocation = new HashMap<>();
-
-    private List<Borrow> allBorrow = new ArrayList<>();
 
     public List<Integer> getListLocationId() {
         return listLocationId;
@@ -60,8 +59,13 @@ public class BorrowBean {
         this.listLocationId = listLocationId;
     }
 
-    private List<Integer> listLocationId = new ArrayList<>();
+    public String getLocationName(int id) {
+        return mapLocation.get(id);
+    }
 
+    public Book getBook() {
+        return book;
+    }
 
     /**
      * Onlick action
@@ -84,14 +88,6 @@ public class BorrowBean {
         countCopiesOfLocation = copy.cNumber;
     }
 
-    public String getLocationName(int id) {
-        return mapLocation.get(id);
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
     public List<Location> getLocations() {
         return locations;
     }
@@ -104,15 +100,12 @@ public class BorrowBean {
         this.selectedLocationId = selectedLocationId;
     }
 
-    private Copy copy = new Copy();
-
     public void onLocationChange() {
 
         copy = copyService.getCopyFromBookLocation(book.bId, selectedLocationId);
         System.out.println(copy.getCId());
     }
 
-    private int countCopiesOfLocation;
     public int getCountCopiesOfLocation() {
         return copyService.numCopyOfLocation(book.bId, selectedLocationId);
     }
@@ -136,7 +129,7 @@ public class BorrowBean {
         if (result == 1) {
             copy.cNumber -= 1;
             copyService.updateCopyNumber(copy);
-            isError = false;
+            RequestContext.getCurrentInstance().execute("PF('bookDialog').show();");
             return;
         }
 

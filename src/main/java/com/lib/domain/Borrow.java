@@ -4,7 +4,7 @@ package com.lib.domain; /*******************************************************
  * Purpose: Defines the Class Borrow
  ***********************************************************************/
 
-import java.util.*;
+import java.util.Date;
 
 /** @pdOid e0f4bb8d-b34c-4e5f-bb12-7ad26e026144 */
 public class Borrow {
@@ -16,19 +16,52 @@ public class Borrow {
    private Date brCreateAt;
    /** @pdOid 616c943d-856c-4a4d-8dc3-fc24c5187025 */
    private Date brReturnDate;
-   
-   /** @pdRoleInfo migr=no name=Admin assc=adminBorrow mult=0..1 side=A */
-   public Admin admin;
-   
+   private int uId;
+   private Integer rId;
+   private int cId;
+   private int aId;
+
    /** @pdOid 3a5f9253-e27b-455a-889b-bda4a553c163 */
    public int getBrId() {
       return brId;
    }
-   
+
    /** @param newBrId
     * @pdOid cf29365d-b65c-48da-8ea0-b5ebfb301a34 */
    public void setBrId(int newBrId) {
       brId = newBrId;
+   }
+
+   public int getuId() {
+      return uId;
+   }
+
+   public void setuId(int uId) {
+      this.uId = uId;
+   }
+
+   public Integer getrId() {
+      return rId;
+   }
+
+   public void setrId(Integer rId) {
+      this.rId = rId;
+   }
+
+   public int getcId() {
+      return cId;
+   }
+
+   public void setcId(int cId) {
+      this.cId = cId;
+   }
+
+   public int getaId() {
+      return aId;
+   }
+
+   public void setaId(int aId) {
+      this.aId = aId;
    }
    
    /** @pdOid cc5aeee0-a5a9-4554-a782-9d5c89c63173 */

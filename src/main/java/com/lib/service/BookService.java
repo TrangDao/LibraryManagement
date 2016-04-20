@@ -2,15 +2,14 @@ package com.lib.service;
 
 import com.lib.dao.book.BookDAO;
 import com.lib.domain.Book;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.lib.modelview.SearchBookCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -20,14 +19,14 @@ import org.springframework.util.StringUtils;
 public class BookService {
 
     @Autowired
-    private BookDAO bookDAOImp;
+    private BookDAO bookDAO;
 
     public List<Book> findAll(){
-        return bookDAOImp.findAll();
+        return bookDAO.findAll();
     }
 
     public int addNewBook(Book newBook) {
-        return bookDAOImp.addNewBook(newBook);
+        return bookDAO.addNewBook(newBook);
     }
 
     public List<Book> searchByCriteria(SearchBookCriteria searchBookCriteria) {
@@ -44,6 +43,10 @@ public class BookService {
             validSearchCriteria.put("b_category", searchBookCriteria.getCategory().trim());
         }
 
-        return bookDAOImp.searchBookByCriteria(validSearchCriteria);
+        return bookDAO.searchBookByCriteria(validSearchCriteria);
+    }
+
+    public Book getById(int bId) {
+        return bookDAO.getById(bId);
     }
 }

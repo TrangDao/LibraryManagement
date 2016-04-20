@@ -154,7 +154,7 @@
                             <!-- Title -->
                             <div class="col-sm-6">
                                 <p:commandButton value="Submit" styleClass="pull-right"
-                                                 update=":requestForm:numCopy :requestForm:error"
+                                                 update=":requestForm:numCopy"
                                                  actionListener="#{borrowBean.requestBorrow}"></p:commandButton>
                             </div>
 
@@ -164,26 +164,13 @@
                         </div>
                     </p:fieldset>
 
-                    <div class="row margin-top-20">
-                        <p:dataTable var="borrow" value="#{borrowBean.allBorrow}" widgetVar="borrowTable" id="borrowTable"
-                                     selectionMode="Single" rowKey="#{borrow.brId}">
-                            <f:facet name="header">
-                                <p:outputPanel>
-                                    <h:outputText value="Search all fields"/>
-                                    <p:inputText id="globalFilter" onkeyup="PF('borrowTable').filter()"
-                                                 style="width:150px" placeholder="Enter keyword"/>
-                                </p:outputPanel>
-                            </f:facet>
-                            <!--<p:ajax event="rowSelect" onstart="PF('bookDialog').show()"-->
-                            <!--listener="#{booksBean.bookRowOnClick(book)}"/>-->
-
-                            <p:column headerText="Id">
-                                <h:outputText value="#{borrow.brId}"/>
-                            </p:column>
-
-                        </p:dataTable>
-                    </div>
                 </div>
+
+                <p:dialog header="Successful!" id="bookDialog" widgetVar="bookDialog" modal="true"
+                          showEffect="fade" hideEffect="fade" resizable="false" width="200">
+                    <p:outputPanel id="multiCarDetail" style="text-align:center;">
+                    </p:outputPanel>
+                </p:dialog>
 
 
 

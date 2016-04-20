@@ -28,4 +28,8 @@ public class BorrowService {
     public List<Borrow> findAll() {
         return borrowDao.findAll();
     }
+
+    public String getUser(int uID) {
+        return borrowDao.getUser(uID);
+    }
 }

@@ -1,14 +1,14 @@
 package com.lib.dao.book;
 
 import com.lib.domain.Book;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by lanhnguyen on 14/03/2016.
@@ -23,6 +23,7 @@ public class BookDAOImp implements BookDAO {
     public BookDAOImp(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
     @Override
     public List<Book> findAll() {
         String sql ="SELECT * FROM book";
@@ -54,5 +55,15 @@ public class BookDAOImp implements BookDAO {
         System.out.println(sqlBuilder.toString());
         List<Book> result = jdbcTemplate.query(sqlBuilder.toString(), new BeanPropertyRowMapper(Book.class));
         return result;
+    }
+
+    @Override
+    public Book getById(int bId) {
+        String sql = "Select * from book where b_id = ?";
+        List<Book> result = jdbcTemplate.query(sql, new Object[]{bId}, new BeanPropertyRowMapper(Book.class));
+        if (result.size() >= 0) {
+            return result.get(0);
+        }
+        return null;
     }
 }

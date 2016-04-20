@@ -1,14 +1,12 @@
 package com.lib.dao.copy;
 
 import com.lib.domain.Copy;
-
-import java.util.List;
-
-import com.lib.domain.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by lanhnguyen on 15/03/2016.
@@ -66,5 +64,15 @@ public class CopyDAOImp implements CopyDAO {
         String sql = "update copy set c_number=? where c_id=?";
         System.out.println(sql);
         return jdbcTemplate.update(sql, new Object[]{copy.cNumber, copy.cId});
+    }
+
+    @Override
+    public Copy getById(int cId) {
+        String sql = "Select * from copy where c_id = ?";
+        List<Copy> result = jdbcTemplate.query(sql, new Object[]{cId}, new BeanPropertyRowMapper(Copy.class));
+        if (result.size() >= 0) {
+            return result.get(0);
+        }
+        return null;
     }
 }
