@@ -92,3 +92,59 @@ div#content {
 .ui-datatable .ui-column-filter{
     display:none !important;
 }
+
+.text-align-center {
+    text-align: center;
+}
+
+.five-percent-width {
+    width: 5%;
+}
+
+.eight-percent-width {
+    width: 8%;
+}
+
+.ten-percent-width {
+    width: 10%;
+}
+
+.twenty-percent-width {
+    width: 20%;
+}
+
+.twenty-five-percent-width {
+    width: 25%;
+}
+
+.thirty-percent-width {
+    width: 30%;
+}
+
+.verticalLine {
+    border-left: outset 1px gray;
+}
+
+.margin-right-15 {
+    margin-right: 15px;
+}
+
+.margin-left-15 {
+    margin-left: 15px;
+}
+
+.margin-top-5 {
+    margin-top: 10px;
+}
+
+.no-margin-right {
+    margin-right: 0px;
+}
+
+.no-padding-right {
+    padding-right: 0px;
+}
+
+.no-padding-left {
+    padding-left: 0px;
+}

@@ -84,45 +84,56 @@
                             <!--<p:ajax event="rowSelect" onstart="PF('bookDialog').show()"-->
                             <!--listener="#{booksBean.bookRowOnClick(book)}"/>-->
 
-                            <p:column headerText="Id" filterBy="#{borrow.brId}" filterMatchMode="contains">
+                            <p:column headerText="Id" filterBy="#{borrow.brId}"
+                                      styleClass="text-align-center five-percent-width" sortBy="#{borrow.brId}"
+                                      filterMatchMode="contains">
                                 <h:outputText value="#{borrow.brId}"/>
                             </p:column>
 
-                            <p:column headerText="Name" filterBy="#{book.BName}" filterMatchMode="contains">
-                                <h:outputText value="#{borrowMgBean.getBookName(borrow.cId)}"/>
-                            </p:column>
-                            <p:column headerText="User First Name" filterBy="#{book.BName}" filterMatchMode="contains">
+                            <p:column headerText="Username" filterBy="#{book.BName}" styleClass="twenty-percent-width"
+                                      filterMatchMode="contains">
                                 <h:outputText value="#{borrowMgBean.getUser(borrow.uId)}"/>
                             </p:column>
 
-                            <p:column headerText="Create At" filterBy="#{borrow.brCreateAt}" filterMatchMode="contains">
+                            <p:column headerText="Title" filterBy="#{book.BName}" sortBy="#{book.BName}"
+                                      styleClass="twenty-five-percent-width" filterMatchMode="contains">
+                                <h:outputText value="#{borrowMgBean.getBookName(borrow.cId)}"/>
+                            </p:column>
+
+
+                            <p:column headerText="Create date" styleClass="text-align-center ten-percent-width"
+                                      filterBy="#{borrow.brCreateAt}" filterMatchMode="contains">
                                 <h:outputText value="#{borrow.brCreateAt}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </h:outputText>
                             </p:column>
 
-                            <p:column headerText="Borrow Date" filterBy="#{borrow.brBorrowDate}"
+                            <p:column headerText="Borrow date" styleClass="text-align-center ten-percent-width"
+                                      filterBy="#{borrow.brBorrowDate}"
                                       filterMatchMode="contains">
                                 <h:outputText value="#{borrow.brBorrowDate}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </h:outputText>
                             </p:column>
 
-                            <p:column headerText="Dead Line" filterBy="#{borrow.brReturnDate}"
+                            <p:column headerText="Deadline" styleClass="text-align-center ten-percent-width"
+                                      filterBy="#{borrow.brReturnDate}"
                                       filterMatchMode="contains">
                                 <h:outputText value="#{borrow.brReturnDate}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </h:outputText>
                             </p:column>
 
-                            <p:column headerText="Return ID" filterBy="#{borrow.rId}" filterMatchMode="contains">
+                            <p:column headerText="Return ID" styleClass="text-align-center ten-percent-width"
+                                      filterBy="#{borrow.rId}" filterMatchMode="contains">
                                 <h:outputText value="#{borrow.rId}">
                                 </h:outputText>
                             </p:column>
 
-                            <p:column>
+                            <p:column styleClass="text-align-center">
                                 <p:commandButton value="Return"
-                                                 rendered="#{!borrowMgBean.isReturned(borrow.rId)}"></p:commandButton>
+                                                 rendered="#{!borrowMgBean.isReturned(borrow.rId)}"
+                                                 actionListener="#{borrowMgBean.returnBook(borrow)}"></p:commandButton>
                                 <!--TO DO: show location and number of copy in popup or anything else-->
                                 <p:commandButton value="Order now" action="#{booksBean.borrowBook(book)}"
                                                  rendered="#{booksBean.isAvailable(book.BId)}"></p:commandButton>

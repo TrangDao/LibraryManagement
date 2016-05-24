@@ -6,6 +6,7 @@ import com.lib.domain.Copy;
 import com.lib.service.BookService;
 import com.lib.service.BorrowService;
 import com.lib.service.CopyService;
+import com.lib.service.ReturnBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +30,9 @@ public class BorrowMgBean {
 
     @Autowired
     BookService bookService;
+
+    @Autowired
+    ReturnBookService returnService;
 
     private List<Borrow> allBorrows;
 
@@ -64,7 +68,11 @@ public class BorrowMgBean {
     }
 
     public boolean isReturned(Integer rID) {
-        System.out.println("rID" + rID);
         return (rID != null && rID != 0);
     }
+
+    public void returnBook(Borrow borrow) {
+
+    }
+
 }

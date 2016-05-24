@@ -70,8 +70,6 @@ public class BorrowBean {
     /**
      * Onlick action
      */
-
-
     public void setBook(Book book) {
         this.book = book;
         locations = locationService.getLocationByBookId(book.bId);
@@ -101,7 +99,6 @@ public class BorrowBean {
     }
 
     public void onLocationChange() {
-
         copy = copyService.getCopyFromBookLocation(book.bId, selectedLocationId);
         System.out.println(copy.getCId());
     }
@@ -118,6 +115,7 @@ public class BorrowBean {
     public void requestBorrow() {
         if (copy.cNumber <=0) {
             isError = true;
+            RequestContext.getCurrentInstance().execute("PF('errorDialog').show();");
             return;
         }
         BorrowModelView borrowModelView = new BorrowModelView();
@@ -136,6 +134,12 @@ public class BorrowBean {
         allBorrow = borrowService.findAll();
 
         isError = true;
+        RequestContext.getCurrentInstance().execute("PF('errorDialog').show();");
+        return;
+    }
+
+    public String redirectPage() {
+        return "borrow.xhtml?faces-redirect=true";
     }
 
     public boolean getIsError() {

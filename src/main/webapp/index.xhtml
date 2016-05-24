@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+>
 <h:body>
 
 
@@ -79,40 +79,41 @@
                     <div class="row margin-top-20">
                         <p:dataTable var="book" value="#{booksBean.allBooks}" widgetVar="booksTable" id="booksTable"
                                      selectionMode="Single" rowKey="#{book.BId}">
-                            <f:facet name="header">
-                                <p:outputPanel>
-                                    <h:outputText value="Search all fields"/>
-                                    <p:inputText id="globalFilter" onkeyup="PF('booksTable').filter()"
-                                                 style="width:150px" placeholder="Enter keyword"/>
-                                </p:outputPanel>
-                            </f:facet>
+
                             <!--<p:ajax event="rowSelect" onstart="PF('bookDialog').show()"-->
                             <!--listener="#{booksBean.bookRowOnClick(book)}"/>-->
 
-                            <p:column headerText="Id" filterBy="#{book.BId}" filterMatchMode="contains">
+                            <p:column headerText="Id" filterBy="#{book.BId}" filterMatchMode="contains"
+                                      styleClass="eight-percent-width text-align-center">
                                 <h:outputText value="#{book.BId}"/>
                             </p:column>
 
-                            <p:column headerText="Name" filterBy="#{book.BName}" filterMatchMode="contains" >
+                            <p:column headerText="Name" filterBy="#{book.BName}" filterMatchMode="contains"
+                                      styleClass="thirty-percent-width">
                                 <h:outputText value="#{book.BName}"/>
                             </p:column>
 
-                            <p:column headerText="Category" filterBy="#{book.BCategory}" filterMatchMode="contains">
+                            <p:column headerText="Category" filterBy="#{book.BCategory}" filterMatchMode="contains"
+                                      styleClass="twenty-percent-width">
                                 <h:outputText value="#{book.BCategory}"/>
                             </p:column>
 
-                            <p:column headerText="Author" filterBy="#{book.BAuthor}" filterMatchMode="contains">
+                            <p:column headerText="Author" filterBy="#{book.BAuthor}" filterMatchMode="contains"
+                                      styleClass="twenty-percent-width">
                                 <h:outputText value="#{book.BAuthor}"/>
                             </p:column>
 
-                            <p:column headerText="Number" filterBy="#{booksBean.countCopy(book.BId)}" filterMatchMode="contains">
+                            <p:column headerText="Total" filterBy="#{booksBean.countCopy(book.BId)}"
+                                      styleClass="eight-percent-width text-align-center"
+                                      filterMatchMode="contains">
                                 <h:outputText value="#{booksBean.countCopy(book.BId)}"/>
                             </p:column>
 
-                            <p:column>
+                            <p:column styleClass="text-align-center">
                                 <!--TO DO: show location and number of copy in popup or anything else-->
                                 <p:commandButton value="Order now" action="#{booksBean.borrowBook(book)}"
                                                  rendered="#{booksBean.isAvailable(book.BId)}"></p:commandButton>
+                                <h:outputText value="Out of book" rendered="#{!booksBean.isAvailable(book.BId)}"/>
 
                             </p:column>
 
@@ -121,6 +122,7 @@
                     </div>
 
                     <p:dialog header="Selected Cars" id="bookDialog" widgetVar="bookDialog" modal="true"
+                              closeOnEscape="true"
                               showEffect="fade" hideEffect="fade" resizable="false" width="200">
                         <p:outputPanel id="multiCarDetail" style="text-align:center;">
                             <h:outputLabel>abc</h:outputLabel>
