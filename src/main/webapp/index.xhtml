@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
 <h:body>
 
@@ -19,7 +20,7 @@
 
                     <!-- Search input field -->
                     <p:fieldset id="search-book-group" styleClass="row">
-                        <h:outputLabel styleClass="sub-title">Search criteria</h:outputLabel>
+                        <h:outputLabel styleClass="sub-title">New Book</h:outputLabel>
                         <!-- Row 1 -->
                         <div class="form-horizontal form-group row">
                             <!-- Title -->
@@ -30,7 +31,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <p:inputText styleClass="form-control"
-                                                     value="#{booksBean.searchBookCriteria.name}"/>
+                                                     value="#{booksBean.newBook.BName}"/>
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +44,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <p:inputText styleClass="form-control"
-                                                     value="#{booksBean.searchBookCriteria.category}"></p:inputText>
+                                                     value="#{booksBean.newBook.BCategory}"></p:inputText>
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +61,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <h:inputText styleClass="form-control"
-                                                     value="#{booksBean.searchBookCriteria.author}"></h:inputText>
+                                                     value="#{booksBean.newBook.BAuthor}"></h:inputText>
                                     </div>
                                 </div>
                             </div>
@@ -71,17 +72,23 @@
                         <div class="row margin-top-20">
                             <div class="col-sm-6">
 
-                                <p:commandButton value="Search" actionListener="#{booksBean.searchBook}"
+                                <p:commandButton value="Add" actionListener="#{booksBean.addNewBook}"
                                                  styleClass="pull-right" update="booksTable"></p:commandButton>
                             </div>
                         </div>
                     </p:fieldset>
                     <div class="row margin-top-20">
                         <p:dataTable var="book" value="#{booksBean.allBooks}" widgetVar="booksTable" id="booksTable"
-                                     selectionMode="Single" rowKey="#{book.BId}">
+                                     selectionMode="Single" rowKey="#{book.BId}" filteredValue="#{booksBean.filteredBooks}">
 
-                            <!--<p:ajax event="rowSelect" onstart="PF('bookDialog').show()"-->
-                            <!--listener="#{booksBean.bookRowOnClick(book)}"/>-->
+                            <f:facet name="header">
+                                <p:outputPanel>
+                                    <h:outputText value="Search all fields:" />
+                                    <p:inputText id="globalFilter" onkeyup="PF('booksTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                                </p:outputPanel>
+                            </f:facet>
+                            <p:ajax event="rowSelect" onstart="PF('bookDialog').show()"
+                            listener="#{booksBean.bookRowOnClick(book)}"/>
 
                             <p:column headerText="Id" filterBy="#{book.BId}" filterMatchMode="contains"
                                       styleClass="eight-percent-width text-align-center">
@@ -121,7 +128,7 @@
                         </p:dataTable>
                     </div>
 
-                    <p:dialog header="Selected Cars" id="bookDialog" widgetVar="bookDialog" modal="true"
+                    <p:dialog header="Add Copy" id="bookDialog" widgetVar="bookDialog" modal="true"
                               closeOnEscape="true"
                               showEffect="fade" hideEffect="fade" resizable="false" width="200">
                         <p:outputPanel id="multiCarDetail" style="text-align:center;">
