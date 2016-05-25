@@ -27,4 +27,7 @@ public interface CopyDAO {
 
     @Transactional
     Copy getById(int cId);
+
+    @Transactional
+    int addNewCopy(Copy copy);
 }

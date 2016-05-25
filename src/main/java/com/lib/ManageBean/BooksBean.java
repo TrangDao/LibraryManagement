@@ -2,6 +2,7 @@ package com.lib.managebean;
 
 import com.lib.domain.Book;
 import com.lib.domain.Borrow;
+import com.lib.domain.Location;
 import com.lib.modelview.SearchBookCriteria;
 import com.lib.service.BookService;
 import com.lib.service.BorrowService;
@@ -13,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
+import com.lib.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,9 +38,18 @@ public class BooksBean {
     @Autowired
     private BorrowBean borrowBean;
 
+    @Autowired
+    LocationService locationService;
+
+    private List<Book> filteredBooks;
+
+    private List<Location> locations = new ArrayList<>();
+
+
     @PostConstruct
     public void init() {
         allBooks = bookService.findAll();
+        locations = locationService.getAllLocation();
        // searchBookCriteria.setName("b");
     }
     private Book newBook = new Book();
@@ -91,6 +102,8 @@ public class BooksBean {
     public void addNewBook() {
         System.out.println("add");
         System.out.println(bookService.addNewBook(newBook));
+        searchBook();
+        System.out.println(allBooks.size());
     }
 
     public String borrowBook(Book book) {
@@ -122,5 +135,13 @@ public class BooksBean {
 
     public List<Book> getAllBooks() {
         return allBooks;
+    }
+
+    public List<Book> getFilteredBooks() {
+        return filteredBooks;
+    }
+
+    public void setFilteredBooks(List<Book> filteredBooks) {
+        this.filteredBooks = filteredBooks;
     }
 }

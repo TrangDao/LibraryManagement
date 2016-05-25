@@ -75,4 +75,10 @@ public class CopyDAOImp implements CopyDAO {
         }
         return null;
     }
+
+    @Override
+    public int addNewCopy(Copy copy) {
+        String SQL = "insert into copy (b_id, l_id, c_number) values (?, ?, ?)";
+        return jdbcTemplate.update( SQL, new Object[]{copy.getbId(), copy.getlId(), copy.getCNumber()});
+    }
 }
