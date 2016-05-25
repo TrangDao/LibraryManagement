@@ -18,11 +18,8 @@ public class ReturnBookDao {
     }
 
     public int create(ReturnBook returnBook) {
-//        String SQL = "insert into return_book(u_id, br_id, a_id, r_create_at, r_return_date) values (?,?,?,?,?)";
-//        Date date = new Date();
-//        Date returnDate = new Date(date.getTime() + (1000 * 60 * 60 * 24) * 7); //1 week
-//        return jdbcTemplate.update(SQL, new Object[]{returnBook.admin.getAId(), returnBook.bor,
-//                borrowModelView.getCopyId(), date, date, returnDate});
-        return 0;
+        String SQL = "insert into return_book(u_id, br_id, a_id, r_create_at, r_return_date) values (?,?,?,?,?)";
+        return jdbcTemplate.update(SQL, new Object[]{returnBook.getuId(), returnBook.getBrId(), returnBook.getaId(), returnBook.getrCreateAt(),
+                returnBook.getrReturnDate()});
     }
 }

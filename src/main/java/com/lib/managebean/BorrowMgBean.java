@@ -3,6 +3,7 @@ package com.lib.managebean;
 import com.lib.domain.Book;
 import com.lib.domain.Borrow;
 import com.lib.domain.Copy;
+import com.lib.domain.ReturnBook;
 import com.lib.service.BookService;
 import com.lib.service.BorrowService;
 import com.lib.service.CopyService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,7 +41,7 @@ public class BorrowMgBean {
     @PostConstruct
     public void init() {
         allBorrows = borrowService.findAll();
-        // searchBookCriteria.setName("b");
+        System.out.println(allBorrows.size());
     }
 
     public List<Borrow> getAllBorrows() {
@@ -72,6 +74,13 @@ public class BorrowMgBean {
     }
 
     public void returnBook(Borrow borrow) {
+        ReturnBook returnBook = new ReturnBook();
+        returnBook.setRReturnDate(new Date());
+        returnBook.setRCreateAt(new Date());
+        returnBook.setaId(1);
+        returnBook.setuId(1);
+        returnBook.setBrId(borrow.getBrId());
+        returnService.create(returnBook);
 
     }
 

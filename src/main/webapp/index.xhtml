@@ -9,7 +9,7 @@
 <h:body>
 
 
-    <ui:composition template="template/common.xhtml">
+    <ui:composition template="template/common.xhtml" >
         <ui:define name="content">
             <h:form id="bookForm">
                 <div class="container">
@@ -87,8 +87,6 @@
                                     <p:inputText id="globalFilter" onkeyup="PF('booksTable').filter()" style="width:150px" placeholder="Enter keyword"/>
                                 </p:outputPanel>
                             </f:facet>
-                            <p:ajax event="rowSelect" onstart="PF('bookDialog').show()"
-                            listener="#{booksBean.bookRowOnClick(book)}"/>
 
                             <p:column headerText="Id" filterBy="#{book.BId}" filterMatchMode="contains"
                                       styleClass="eight-percent-width text-align-center">
@@ -96,7 +94,7 @@
                             </p:column>
 
                             <p:column headerText="Name" filterBy="#{book.BName}" filterMatchMode="contains"
-                                      styleClass="thirty-percent-width">
+                                      styleClass="twenty-percent-width">
                                 <h:outputText value="#{book.BName}"/>
                             </p:column>
 
@@ -106,7 +104,7 @@
                             </p:column>
 
                             <p:column headerText="Author" filterBy="#{book.BAuthor}" filterMatchMode="contains"
-                                      styleClass="twenty-percent-width">
+                                      styleClass="fifteen-percent-width">
                                 <h:outputText value="#{book.BAuthor}"/>
                             </p:column>
 
@@ -116,9 +114,15 @@
                                 <h:outputText value="#{booksBean.countCopy(book.BId)}"/>
                             </p:column>
 
-                            <p:column styleClass="text-align-center">
+                            <p:column styleClass="ten-percent-width text-align-center">
+                                <p:commandButton oncomplete="PF('bookDialog').show()" value="Add Copy">
+                                    <f:setPropertyActionListener value="#{book}" target="#{booksBean.selectedBook}" />
+                                </p:commandButton>
+                            </p:column>
+
+                            <p:column styleClass="ten-percent-width text-align-center">
                                 <!--TO DO: show location and number of copy in popup or anything else-->
-                                <p:commandButton value="Order now" action="#{booksBean.borrowBook(book)}"
+                                <p:commandButton value="Request now" action="#{booksBean.borrowBook(book)}"
                                                  rendered="#{booksBean.isAvailable(book.BId)}"></p:commandButton>
                                 <h:outputText value="Out of book" rendered="#{!booksBean.isAvailable(book.BId)}"/>
 
@@ -130,10 +134,120 @@
 
                     <p:dialog header="Add Copy" id="bookDialog" widgetVar="bookDialog" modal="true"
                               closeOnEscape="true"
-                              showEffect="fade" hideEffect="fade" resizable="false" width="200">
-                        <p:outputPanel id="multiCarDetail" style="text-align:center;">
-                            <h:outputLabel>abc</h:outputLabel>
-                        </p:outputPanel>
+                              showEffect="fade" hideEffect="fade" resizable="false" width="2000">
+                        <div id="bookDetail" class="col-md-8 verticalLine">
+                            <h:outputLabel styleClass="sub-title margin-left-15">Book info</h:outputLabel>
+                            <!-- Row 1 -->
+                            <div class="form-horizontal form-group row">
+                                <!-- Title -->
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-3 margin-left-15">
+                                            <h:outputLabel class="control-label">Book ID </h:outputLabel>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p:inputText styleClass="form-control" disabled="true"
+                                                         value="#{booksBean.selectedBook.BId}"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Title -->
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-3 margin-left-15">
+                                            <h:outputLabel class="control-label">Author </h:outputLabel>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p:inputText styleClass="form-control" disabled="true"
+                                                         value="#{booksBean.selectedBook.BAuthor}"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Row 2 -->
+                            <div class="form-horizontal form-group row">
+                                <!-- Title -->
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-3 margin-left-15 no-padding-right">
+                                            <h:outputLabel class="control-label ">Book title</h:outputLabel>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p:inputText styleClass="form-control" disabled="true"
+                                                         value="#{booksBean.selectedBook.BName}"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Title -->
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-3 margin-left-15">
+                                            <h:outputLabel
+                                                    class="control-label">Category </h:outputLabel>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p:inputText styleClass="form-control" disabled="true"
+                                                         value="#{booksBean.selectedBook.BCategory}"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <h:outputLabel
+                                    styleClass="sub-title margin-left-15 margin-top-5">Copy info</h:outputLabel>
+                            <!-- Row 1 -->
+                            <div class="form-horizontal form-group row">
+                                <!-- Title -->
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-3 margin-left-15">
+                                            <h:outputLabel
+                                                    class="control-label ">Location </h:outputLabel>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p:selectOneMenu value="#{booksBean.selectedLocationId}"
+                                                             style="width:160px">
+                                                <!--<p:ajax listener="#{borrowBean.onLocationChange}"-->
+                                                        <!--update=":requestForm:numCopy"/>-->
+                                                <f:selectItems value="#{booksBean.listLocationId}"
+                                                               var="loc"
+                                                               itemLabel="#{booksBean.getLocationName(loc)}"
+                                                />
+                                            </p:selectOneMenu>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Title -->
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-3 margin-left-15 no-padding-right no-padding-left">
+                                            <h:outputLabel
+                                                    styleClass=" control-label">Num of copy</h:outputLabel>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <h:inputText styleClass="form-control"
+                                                         value="#{booksBean.copy.CNumber}"></h:inputText>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Button-->
+                            <div class="row margin-top-20">
+                                <div class="col-sm-6">
+
+                                    <p:commandButton value="Add" actionListener="#{booksBean.addNewCopy}"
+                                                     oncomplete="PF('bookDialog').hide()"
+                                                     styleClass="pull-right" update="booksTable"></p:commandButton>
+                                </div>
+                            </div>
+                        </div>
                     </p:dialog>
                 </div>
 

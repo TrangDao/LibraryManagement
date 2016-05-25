@@ -44,7 +44,7 @@
             </div>
 
             <div class="row margin-top-20">
-                    <p:dataTable var="book" widgetVar="categoriesTable">
+                    <p:dataTable var="selectedBook" widgetVar="categoriesTable">
                     <f:facet name="header">
                         <p:outputPanel>
                             <h:outputText value="Search all fields"/>
@@ -54,15 +54,15 @@
                     </f:facet>
 
                     <p:column headerText="Id">
-                        <h:outputText value="#{book}"/>
+                        <h:outputText value="#{selectedBook}"/>
                     </p:column>
 
                     <p:column headerText="Position">
-                        <h:outputText value="#{book}"/>
+                        <h:outputText value="#{selectedBook}"/>
                     </p:column>
 
                     <p:column headerText="Stock">
-                        <h:outputText value="#{book}"/>
+                        <h:outputText value="#{selectedBook}"/>
                     </p:column>
 
                 </p:dataTable>

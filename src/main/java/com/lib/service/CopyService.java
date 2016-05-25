@@ -14,7 +14,7 @@ public class CopyService {
     @Autowired
     private CopyDAO copyDAO;
 
-    public int sumCopyForBook(int bookID){
+    public int sumCopyForBook(int bookID) {
         return copyDAO.countCopyForBook(bookID);
     }
 
@@ -32,5 +32,9 @@ public class CopyService {
 
     public Copy getCopyById(int cId) {
         return copyDAO.getById(cId);
+    }
+
+    public int addNewCopy(Copy copy) {
+        return copyDAO.addNewCopy(copy);
     }
 }

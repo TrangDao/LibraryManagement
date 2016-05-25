@@ -46,4 +46,9 @@ public class BorrowDAO {
         }
         return null;
     }
+
+    public int updateRid(int rID, int brId){
+        String sql = "update borrow set r_id = ? where br_id = ?";
+        return jdbcTemplate.update(sql, new Object[]{rID, brId});
+    }
 }

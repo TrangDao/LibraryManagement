@@ -70,7 +70,7 @@ public class CopyDAOImp implements CopyDAO {
     public Copy getById(int cId) {
         String sql = "Select * from copy where c_id = ?";
         List<Copy> result = jdbcTemplate.query(sql, new Object[]{cId}, new BeanPropertyRowMapper(Copy.class));
-        if (result.size() >= 0) {
+        if (result.size() > 0) {
             return result.get(0);
         }
         return null;

@@ -37,18 +37,7 @@ import org.springframework.context.annotation.Configuration;
 public class Main extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        ApplicationContext ctx = SpringApplication.run(Main.class, args);
-
-        System.out.println("Let's inspect the beans provided by Spring Boot:");
-
-        CopyService bookService = ctx.getBean(CopyService.class);
-        System.out.println("sumcopy " +bookService.sumCopyForBook(4));
-
-        String[] beanNames = ctx.getBeanDefinitionNames();
-        Arrays.sort(beanNames);
-        for (String beanName : beanNames) {
-            System.out.println(beanName);
-        }
+        SpringApplication.run(Main.class, args);
     }
 
 

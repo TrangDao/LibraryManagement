@@ -17,11 +17,18 @@ public class ReturnBook {
    
    /** @pdRoleInfo migr=no name=Admin assc=adminReturn mult=0..1 side=A */
    public Admin admin;
-   
+
+
+   private int uId;
+
+   private int aId;
+
+   private int brId;
    /** @pdOid 5a86b9d8-ce7c-4540-b03d-b3cb8a86bdfc */
    public int getRId() {
       return rId;
    }
+
    
    /** @param newRId
     * @pdOid 77f62497-1274-4b3a-995f-87d61f6b17e6 */
@@ -51,4 +58,59 @@ public class ReturnBook {
       rReturnDate = newRReturnDate;
    }
 
+   public int getrId() {
+      return rId;
+   }
+
+   public void setrId(int rId) {
+      this.rId = rId;
+   }
+
+   public Date getrCreateAt() {
+      return rCreateAt;
+   }
+
+   public void setrCreateAt(Date rCreateAt) {
+      this.rCreateAt = rCreateAt;
+   }
+
+   public Date getrReturnDate() {
+      return rReturnDate;
+   }
+
+   public void setrReturnDate(Date rReturnDate) {
+      this.rReturnDate = rReturnDate;
+   }
+
+   public Admin getAdmin() {
+      return admin;
+   }
+
+   public void setAdmin(Admin admin) {
+      this.admin = admin;
+   }
+
+   public int getuId() {
+      return uId;
+   }
+
+   public void setuId(int uId) {
+      this.uId = uId;
+   }
+
+   public int getaId() {
+      return aId;
+   }
+
+   public void setaId(int aId) {
+      this.aId = aId;
+   }
+
+   public int getBrId() {
+      return brId;
+   }
+
+   public void setBrId(int brId) {
+      this.brId = brId;
+   }
 }
