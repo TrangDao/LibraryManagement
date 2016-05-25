@@ -2,7 +2,6 @@ package com.lib.service;
 
 import com.lib.dao.BorrowDAO;
 import com.lib.dao.ReturnBookDao;
-import com.lib.domain.Borrow;
 import com.lib.domain.ReturnBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +23,11 @@ public class ReturnBookService {
         int rId = returnBookDao.create(returnBook);
         borrowDAO.updateRid(rId, returnBook.getBrId());
         return rId;
+
+    }
+
+    public ReturnBook getById(int rId) {
+        return returnBookDao.getById(rId);
 
     }
 }

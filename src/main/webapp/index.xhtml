@@ -18,9 +18,8 @@
                     </div>
 
 
-                    <!-- Search input field -->
-                    <p:fieldset id="search-book-group" styleClass="row">
-                        <h:outputLabel styleClass="sub-title">New Book</h:outputLabel>
+                    <!-- Add book field -->
+                    <p:fieldset id="search-book-group" styleClass="row" legend="New Book" toggleable="true">
                         <!-- Row 1 -->
                         <div class="form-horizontal form-group row">
                             <!-- Title -->
@@ -73,22 +72,31 @@
                             <div class="col-sm-6">
 
                                 <p:commandButton value="Add" actionListener="#{booksBean.addNewBook}"
-                                                 styleClass="pull-right" update="booksTable"></p:commandButton>
+                                                 styleClass="pull-right button-blue" icon="ui-icon-plus"
+                                                 update="booksTable"></p:commandButton>
                             </div>
                         </div>
                     </p:fieldset>
                     <div class="row margin-top-20">
                         <p:dataTable var="book" value="#{booksBean.allBooks}" widgetVar="booksTable" id="booksTable"
-                                     selectionMode="Single" rowKey="#{book.BId}" filteredValue="#{booksBean.filteredBooks}">
+                                     style="margin-bottom: 50px;"
+                                     selectionMode="Single" rowKey="#{book.BId}"
+                                     filteredValue="#{booksBean.filteredBooks}"
+                                     rows="10"
+                                     paginator="true"
+                                     paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15">
 
                             <f:facet name="header">
-                                <p:outputPanel>
-                                    <h:outputText value="Search all fields:" />
+                                <p:outputPanel style="text-align: right" styleClass="table-header">
+                                    <h:outputText value="Search all fields: "/>
                                     <p:inputText id="globalFilter" onkeyup="PF('booksTable').filter()" style="width:150px" placeholder="Enter keyword"/>
                                 </p:outputPanel>
                             </f:facet>
 
-                            <p:column headerText="Id" filterBy="#{book.BId}" filterMatchMode="contains"
+                            <p:column headerText="Id" sortBy="#{book.BId}" filterBy="#{book.BId}"
+                                      filterMatchMode="contains"
                                       styleClass="eight-percent-width text-align-center">
                                 <h:outputText value="#{book.BId}"/>
                             </p:column>
@@ -104,7 +112,7 @@
                             </p:column>
 
                             <p:column headerText="Author" filterBy="#{book.BAuthor}" filterMatchMode="contains"
-                                      styleClass="fifteen-percent-width">
+                                      styleClass="twenty-percent-width">
                                 <h:outputText value="#{book.BAuthor}"/>
                             </p:column>
 
@@ -114,17 +122,18 @@
                                 <h:outputText value="#{booksBean.countCopy(book.BId)}"/>
                             </p:column>
 
-                            <p:column styleClass="ten-percent-width text-align-center">
-                                <p:commandButton oncomplete="PF('bookDialog').show()" value="Add Copy">
+                            <p:column styleClass="twelve-percent-width text-align-center">
+                                <p:commandButton oncomplete="PF('bookDialog').show()" value="Add Copy"
+                                                 update=":bookForm:bookDialog">
                                     <f:setPropertyActionListener value="#{book}" target="#{booksBean.selectedBook}" />
                                 </p:commandButton>
                             </p:column>
 
-                            <p:column styleClass="ten-percent-width text-align-center">
+                            <p:column styleClass="twelve-percent-width-percent-width text-align-center">
                                 <!--TO DO: show location and number of copy in popup or anything else-->
-                                <p:commandButton value="Request now" action="#{booksBean.borrowBook(book)}"
+                                <p:commandButton value="Request" action="#{booksBean.borrowBook(book)}"
                                                  rendered="#{booksBean.isAvailable(book.BId)}"></p:commandButton>
-                                <h:outputText value="Out of book" rendered="#{!booksBean.isAvailable(book.BId)}"/>
+                                <h:outputText value="Out of books" rendered="#{!booksBean.isAvailable(book.BId)}"/>
 
                             </p:column>
 
@@ -134,8 +143,8 @@
 
                     <p:dialog header="Add Copy" id="bookDialog" widgetVar="bookDialog" modal="true"
                               closeOnEscape="true"
-                              showEffect="fade" hideEffect="fade" resizable="false" width="2000">
-                        <div id="bookDetail" class="col-md-8 verticalLine">
+                              showEffect="fade" hideEffect="fade" resizable="false" width="800">
+                        <div id="bookDetail">
                             <h:outputLabel styleClass="sub-title margin-left-15">Book info</h:outputLabel>
                             <!-- Row 1 -->
                             <div class="form-horizontal form-group row">

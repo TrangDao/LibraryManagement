@@ -8,20 +8,19 @@ import com.lib.modelview.SearchBookCriteria;
 import com.lib.service.BookService;
 import com.lib.service.BorrowService;
 import com.lib.service.CopyService;
+import com.lib.service.LocationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-
-import com.lib.service.LocationService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 /**
  * Created by TR on 3/13/2016.
@@ -33,20 +32,15 @@ import org.springframework.util.StringUtils;
 public class BooksBean implements Serializable {
 
     @Autowired
+    LocationService locationService;
+    @Autowired
     private BookService bookService;
-
     @Autowired
     private BorrowService borrowService;
-
     @Autowired
     private CopyService copyService;
-
     @Autowired
     private BorrowBean borrowBean;
-
-    @Autowired
-    LocationService locationService;
-
     private Book selectedBook;
 
     private Copy copy = new Copy();
@@ -60,7 +54,11 @@ public class BooksBean implements Serializable {
     private List<Integer> listLocationId = new ArrayList<>();
 
     private int selectedLocationId;
-
+    private Book newBook = new Book();
+    private Borrow borrow = new Borrow();
+    private String name = "";
+    private List<Book> allBooks = new ArrayList<>();
+    private SearchBookCriteria searchBookCriteria = new SearchBookCriteria();
 
     @PostConstruct
     public void init() {
@@ -81,11 +79,6 @@ public class BooksBean implements Serializable {
 
         this.selectedBook = book;
     }
-    private Book newBook = new Book();
-
-    private Borrow borrow = new Borrow();
-
-    private String name = "";
 
     public String getName() {
         return name;
@@ -103,10 +96,6 @@ public class BooksBean implements Serializable {
         this.borrow = borrow;
     }
 
-    private List<Book> allBooks = new ArrayList<>();
-
-    private SearchBookCriteria searchBookCriteria = new SearchBookCriteria();
-
 
 //    public List<Book> getAllBooks() {
 //        return bookService.findAll();
@@ -120,12 +109,12 @@ public class BooksBean implements Serializable {
         return  (copyService.sumCopyForBook(bookID) > 0);
     }
 
-    public void setBookService(BookService bookService) {
-        this.bookService = bookService;
-    }
-
     public BookService getBookService() {
         return bookService;
+    }
+
+    public void setBookService(BookService bookService) {
+        this.bookService = bookService;
     }
 
     public void addNewBook() {
@@ -133,6 +122,7 @@ public class BooksBean implements Serializable {
             bookService.addNewBook(newBook);
         }
         searchBook();
+        newBook = new Book();
     }
 
     public String borrowBook(Book book) {
@@ -157,6 +147,10 @@ public class BooksBean implements Serializable {
 
     public Book getNewBook() {
         return newBook;
+    }
+
+    public void setNewBook(Book newBook) {
+        this.newBook = newBook;
     }
 
     public SearchBookCriteria getSearchBookCriteria() {
@@ -209,10 +203,6 @@ public class BooksBean implements Serializable {
 
     public void setSelectedLocationId(int selectedLocationId) {
         this.selectedLocationId = selectedLocationId;
-    }
-
-    public void setNewBook(Book newBook) {
-        this.newBook = newBook;
     }
 
     public List<Integer> getListLocationId() {

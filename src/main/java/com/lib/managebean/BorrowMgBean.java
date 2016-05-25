@@ -45,6 +45,7 @@ public class BorrowMgBean {
     }
 
     public List<Borrow> getAllBorrows() {
+        allBorrows = borrowService.findAll();
         return allBorrows;
     }
 
@@ -81,6 +82,15 @@ public class BorrowMgBean {
         returnBook.setuId(1);
         returnBook.setBrId(borrow.getBrId());
         returnService.create(returnBook);
+
+    }
+
+    public Date getReturnDate(int rId) {
+        ReturnBook returnBook = returnService.getById(rId);
+        if (returnBook != null) {
+            return returnBook.getRReturnDate();
+        }
+        return null;
 
     }
 

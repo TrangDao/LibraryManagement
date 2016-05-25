@@ -30,4 +30,6 @@ public interface CopyDAO {
 
     @Transactional
     int addNewCopy(Copy copy);
+
+    Copy findCopyByBookAndLocation(int bId, int lId);
 }

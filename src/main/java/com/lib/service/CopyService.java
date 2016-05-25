@@ -35,6 +35,11 @@ public class CopyService {
     }
 
     public int addNewCopy(Copy copy) {
+        Copy oldCopy = copyDAO.findCopyByBookAndLocation(copy.getbId(), copy.getlId());
+        if (oldCopy != null) {
+            oldCopy.setCNumber(copy.getCNumber() + oldCopy.cNumber);
+            return copyDAO.updateCopyNumber(oldCopy);
+        }
         return copyDAO.addNewCopy(copy);
     }
 }

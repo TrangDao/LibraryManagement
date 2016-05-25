@@ -6,8 +6,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:body>
-
-
     <ui:composition template="template/common.xhtml">
         <ui:define name="content">
             <h:form id="borrowsForm">
@@ -20,10 +18,13 @@
                     <div class="row margin-top-20">
                         <p:dataTable var="borrow" value="#{borrowMgBean.allBorrows}" widgetVar="borrowsTable"
                                      id="borrowsTable"
+                                     rows="10"
+                                     paginator="true"
+                                     paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15"
                                      selectionMode="Single" rowKey="#{borrow.brId}">
 
-                            <!--<p:ajax event="rowSelect" onstart="PF('bookDialog').show()"-->
-                            <!--listener="#{booksBean.bookRowOnClick(selectedBook)}"/>-->
 
                             <p:column headerText="Id" filterBy="#{borrow.brId}"
                                       styleClass="text-align-center five-percent-width" sortBy="#{borrow.brId}"
@@ -31,12 +32,13 @@
                                 <h:outputText value="#{borrow.brId}"/>
                             </p:column>
 
-                            <p:column headerText="Username" filterBy="#{selectedBook.BName}" styleClass="twenty-percent-width"
+                            <p:column headerText="Username" filterBy="#{selectedBook.BName}"
+                                      styleClass="twenty-percent-width"
                                       filterMatchMode="contains">
                                 <h:outputText value="#{borrowMgBean.getUser(borrow.uId)}"/>
                             </p:column>
 
-                            <p:column headerText="Title" filterBy="#{selectedBook.BName}" sortBy="#{selectedBook.BName}"
+                            <p:column headerText="Title" filterBy="#{selectedBook.BName}"
                                       styleClass="twenty-five-percent-width" filterMatchMode="contains">
                                 <h:outputText value="#{borrowMgBean.getBookName(borrow.cId)}"/>
                             </p:column>
@@ -65,9 +67,10 @@
                                 </h:outputText>
                             </p:column>
 
-                            <p:column headerText="Return ID" styleClass="text-align-center ten-percent-width"
+                            <p:column headerText="Return Date" styleClass="text-align-center ten-percent-width"
                                       filterBy="#{borrow.rId}" filterMatchMode="contains">
-                                <h:outputText value="#{borrow.rId}">
+                                <h:outputText value="#{borrowMgBean.getReturnDate(borrow.rId)}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </h:outputText>
                             </p:column>
 

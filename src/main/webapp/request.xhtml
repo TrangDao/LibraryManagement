@@ -25,11 +25,11 @@
                                     <!-- Admin -->
                                     <div class="form-group">
                                         <div class="col-sm-4">
-                                            <h:outputLabel class="control-label pull-right">Admin Id</h:outputLabel>
+                                            <h:outputLabel class="control-label pull-right">Admin</h:outputLabel>
                                         </div>
                                         <div class="col-sm-6">
                                             <p:inputText styleClass="form-control" disabled="true"
-                                                         value="1"></p:inputText>
+                                                         value="Admin"></p:inputText>
                                         </div>
                                     </div>
 
@@ -37,11 +37,16 @@
                                     <div class="form-group">
                                         <div class="col-sm-4">
                                             <h:outputLabel
-                                                    styleClass="pull-right control-label">User Id</h:outputLabel>
+                                                    styleClass="pull-right control-label">Username</h:outputLabel>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p:inputText styleClass="form-control" disabled="true"
-                                                         value="1"></p:inputText>
+                                            <p:selectOneMenu value="#{borrowBean.selectedUserId}"
+                                                             style="width:165px">
+                                                <f:selectItems value="#{borrowBean.listUserId}"
+                                                               var="userId"
+                                                               itemLabel="#{borrowBean.getUserName(userId)}"
+                                                />
+                                            </p:selectOneMenu>
                                         </div>
                                     </div>
 
@@ -127,7 +132,7 @@
                                             </div>
                                             <div class="col-sm-8">
                                                 <p:selectOneMenu value="#{borrowBean.selectedLocationId}"
-                                                                 style="width:160px">
+                                                                 style="width:165px">
                                                     <p:ajax listener="#{borrowBean.onLocationChange}"
                                                             update=":requestForm:numCopy"/>
                                                     <f:selectItems value="#{borrowBean.listLocationId}"

@@ -14,10 +14,7 @@
     background-color: #0096d6 !important;
 }
 
-.button-blue {
-    background-color: #0096d6 !important;
-    color: white;
-}
+
 
 .button-gray {
     background-color: #8c8c8c !important;
@@ -55,6 +52,7 @@
 
 span.ui-menuitem-text {
     color: white;
+    font-size: 18px;
 }
 
 .ui-menuitem {
@@ -62,7 +60,8 @@ span.ui-menuitem-text {
 }
 
 .ui-menu {
-    padding: 0em !important;
+    padding: 8px !important;
+    padding-left: 90px !important;
 }
 span {
     margin-right: 5px;
@@ -86,7 +85,7 @@ li.ui-state-default.ui-corner-left {
 }
 
 div#content {
-    margin-top: 5em;
+    margin-top: 3em;
 }
 
 .ui-datatable .ui-column-filter{
@@ -107,6 +106,14 @@ div#content {
 
 .ten-percent-width {
     width: 10%;
+}
+
+.twelve-percent-width {
+    width: 12%;
+}
+
+.fifty-percent-width {
+    width: 15%;
 }
 
 .twenty-percent-width {
@@ -145,6 +152,46 @@ div#content {
     padding-right: 0px;
 }
 
+/*.button-blue {*/
+/*background: #0096d5 !important;*/
+/*text-shadow: none !important;*/
+/*box-shadow: none !important;*/
+/*}*/
+
 .no-padding-left {
     padding-left: 0px;
 }
+
+.ui-datatable .ui-datatable-header {
+    background: none;
+    border: none;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-right: 0px;
+}
+
+.ui-selectonemenu-trigger.ui-state-default.ui-corner-right {
+    width: 25px;
+    padding-top: 4px;
+}
+
+legend {
+    width: 15%;
+}
+
+legend.ui-fieldset-legend.ui-corner-all.ui-state-default {
+    background: none;
+    border: none;
+    color: #0096d6;
+    font-size: 23px;
+}
+
+.ui-paginator {
+    background: none;
+    border: none;
+
+}
+
+/*span.ui-button-text.ui-c {*/
+/*color: white;*/
+/*}*/

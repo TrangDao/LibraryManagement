@@ -81,4 +81,14 @@ public class CopyDAOImp implements CopyDAO {
         String SQL = "insert into copy (b_id, l_id, c_number) values (?, ?, ?)";
         return jdbcTemplate.update( SQL, new Object[]{copy.getbId(), copy.getlId(), copy.getCNumber()});
     }
+
+    @Override
+    public Copy findCopyByBookAndLocation(int bId, int lId) {
+        String sql = "Select * from copy where b_id = ? and l_id =? limit 1";
+        List<Copy> result = jdbcTemplate.query(sql, new Object[]{bId, lId}, new BeanPropertyRowMapper(Copy.class));
+        if (result.size() > 0) {
+            return result.get(0);
+        }
+        return null;
+    }
 }
